@@ -49,13 +49,15 @@ export default defineConfig({
 
     sidebar: generateSidebar([
       {
-        manualSortFileNameByPriority: ["README.md"],
+        manualSortFileNameByPriority: ["README"],
         collapsed: true,
         collapseDepth: 2,
         useFolderLinkFromIndexFile: true,
         // 如果要把 src 目录下的文件放到根目录，可以设置 scanStartPath 为 '/src'
         // 而不是使用 documentRootPath: 'example', 会导致所有文件都放到 example 目录下;
         scanStartPath: '/src',
+        // 用法是, 直接写名字; 
+        excludeFolders: ['D0g3'],
       },
     ]),
 
