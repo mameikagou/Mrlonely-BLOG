@@ -27,4 +27,4 @@ jobs:
           access-key-id: ${{ secrets.ACCESSKEYID }}
           access-key-secret: ${{ secrets.ACCESSKEYSECRET }}
           instance-id: ${{secrets.INSTANCEID}}
-          source-dir: 'build'  # 构建生成的目录
+          source-dir: '.vitepress/dist'  # 构建生成的目录
