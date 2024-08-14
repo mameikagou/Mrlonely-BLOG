@@ -1,9 +1,9 @@
 name: Mrlonely-BLOGS
 on:
   push:
-    branches:
-      - main  # 触发部署的分支
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   build:
