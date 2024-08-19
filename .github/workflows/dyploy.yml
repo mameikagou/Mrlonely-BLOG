@@ -1,0 +1,30 @@
+name: Mrlonely-BLOGS
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up `pnpm`
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: true
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy to Alibaba Cloud
+        uses: aliyun/alicloud-action@v1
+        with:
+          access-key-id: ${{ secrets.ACCESSKEYID }}
+          access-key-secret: ${{ secrets.ACCESSKEYSECRET }}
+          instance-id: ${{secrets.INSTANCEID}}
+          source-dir: '.vitepress/dist'  # 构建生成的目录

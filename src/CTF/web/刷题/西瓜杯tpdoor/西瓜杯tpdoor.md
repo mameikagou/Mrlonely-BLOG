@@ -1,3 +1,6 @@
+# php源代码
+
+```php
 <!-- 题目给的index.php -->
 <?php
 
@@ -34,3 +37,4 @@ class Index extends BaseController
         }
     }
 }
+```

