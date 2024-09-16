@@ -1,6 +1,6 @@
 # ssh refuse
 
-可能是没开
+可能是服务器没开ssh
 
 ```bash
 systemctl status ssh 
