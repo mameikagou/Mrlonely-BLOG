@@ -5,13 +5,13 @@
 
 上传: .htaccess
 
-```.htaccess
+```txt
 <FilesMatch "1.png"> 
 SetHandler application/x-httpd-php 
 </FilesMatch> 
 ```
 
-```.htaccess
+```txt
 SetHandler application/x-httpd-php
 ```
 
