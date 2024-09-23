@@ -19,7 +19,7 @@ export default defineConfig({
   themeConfig: {
     editLink: {
       pattern:
-        "https://github.com/mameikagou/vitepress-template/edit/main/:path",
+        "https://github.com/mameikagou/Mrlonely-BLOG/:path",
       text: "在 GitHub 上编辑此页面",
     },
     search: {
