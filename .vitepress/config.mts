@@ -81,7 +81,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: "github",
-        link: "https://github.com/mameikagou/vitepress-template",
+        link: "https://github.com/mameikagou/Mrlonely-BLOG",
       },
     ],
   },
