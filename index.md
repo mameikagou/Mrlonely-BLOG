@@ -15,11 +15,14 @@ hero:
     #   link: /api-examples
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  # - title: Feature A
+  #   details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
 
+Hi~ It's mrlonely, This is my blog.
+
+I am a Front-End Engineer, interning at ByteDance, base at BeiJing.
+
+I had interned in a network security company, and once considered switching to study cybersecurity, until I received an interview invitation from ByteDance...
+
+Now, I will talk to you my story;
