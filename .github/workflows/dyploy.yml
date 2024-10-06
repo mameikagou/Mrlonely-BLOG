@@ -36,7 +36,7 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.ALIYUN_SERVER_IP }}
-          username: ${{ secrets.ALIYUN_SERVER_USERNAME }}
+          username: ${{ secrets.USERNAME }}
           key: ${{ secrets.BLOGPRIVATEKEY }}
           password: ${{ secrets.PASSWORD }}
           # access-key-id: ${{ secrets.ACCESSKEYID }}
