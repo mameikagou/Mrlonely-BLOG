@@ -13,18 +13,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up `pnpm`
-        uses: pnpm/action-setup@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          run_install: true
+          node-version: '20.x'
+
+      - name: Setup Corepack
+        run: corepack enable
+  
+      - name: Install dependencies
+        run: pnpm i
+
+      # - name: Set up `pnpm`
+      #   uses: pnpm/action-setup@v4
+      #   with:
+      #     run_install: true
 
       - name: Build
         run: pnpm build
 
       - name: Deploy to Alibaba Cloud
-        uses: aliyun/alicloud-action@v1
+        uses: appleboy/scp-action@v0.1.7
         with:
-          access-key-id: ${{ secrets.ACCESSKEYID }}
-          access-key-secret: ${{ secrets.ACCESSKEYSECRET }}
-          instance-id: ${{secrets.INSTANCEID}}
-          source-dir: '.vitepress/dist'  # 构建生成的目录
+          host: ${{ secrets.ALIYUN_SERVER_IP }}
+          username: ${{ secrets.ALIYUN_SERVER_USERNAME }}
+          key: ${{ secrets.BLOGPRIVATEKEY }}
+          # password: ${{ secrets.PASSWORD }}
+          # access-key-id: ${{ secrets.ACCESSKEYID }}
+          # access-key-secret: ${{ secrets.ACCESSKEYSECRET }}
+          # instance-id: ${{secrets.INSTANCEID}}
+          source: '.vitepress/dist'  # 构建生成的目录
+          target: /usr/share/caddy/blog
