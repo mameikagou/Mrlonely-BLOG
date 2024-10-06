@@ -38,7 +38,7 @@ jobs:
           host: ${{ secrets.ALIYUN_SERVER_IP }}
           username: ${{ secrets.ALIYUN_SERVER_USERNAME }}
           key: ${{ secrets.BLOGPRIVATEKEY }}
-          # password: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
           # access-key-id: ${{ secrets.ACCESSKEYID }}
           # access-key-secret: ${{ secrets.ACCESSKEYSECRET }}
           # instance-id: ${{secrets.INSTANCEID}}
