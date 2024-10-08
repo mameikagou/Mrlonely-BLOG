@@ -48,6 +48,10 @@ Host ip地址
 
 ## Problem
 
+### 密码已重置,服务已修改
+
+在`~/.ssh`下, 删除`known_hosts`文件, 然后重新连接即可
+
 ### ssh refuse
 
 可能是服务器没开ssh
