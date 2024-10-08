@@ -27,9 +27,9 @@ mysql -uroot -p123456
 docker使用指南: <https://docker-practice.github.io>
 国内镜像: <https://vuepress.mirror.docker-practice.com/>
 
-## 阿里云镜像加速
+## 镜像加速
 
-<https://docker-practice.github.io/zh-cn/install/mirror.html>
+阿里云: <https://docker-practice.github.io/zh-cn/install/mirror.html>
 
 ```sh
 sudo mkdir -p /etc/docker
@@ -42,3 +42,17 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 ```
+
+## 容器操作
+
+停止所有容器: docker stop $(docker ps -q)
+销毁所有容器: docker rm $(docker ps -a -q)
+
+## 镜像操作
+
+查看所有镜像: docker image ls
+删除: docker image rm 
+
+## 
+构建镜像: docker build -t backend .
+构建服务: docker compose -f compose.yaml up -d
