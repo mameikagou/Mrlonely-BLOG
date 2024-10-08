@@ -25,6 +25,7 @@ mysql -uroot -p123456
 ## 安装
 
 docker使用指南: <https://docker-practice.github.io>
+国内镜像: <https://vuepress.mirror.docker-practice.com/>
 
 ## 阿里云镜像加速
 
