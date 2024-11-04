@@ -22,16 +22,16 @@
   }
   
   // 节流
-  function throttle(fn, delay = 100) {
-    let lastTime = 0;
-    return function () {
-      let nowTime = +new Date();
-      if (nowTime - lastTime > delay) {
+  function throttle(fn, delay=200){
+    let time = 0;
+    return function(){
+      if(Date.now() - time > delay){
         fn.apply(this, arguments);
-        lastTime = nowTime;
+        time = Date.now();
       }
-    };
+    }
   }
+
   const onScroll = throttle(
     () => (showBackTop.value = Boolean(window.scrollY > 100))
   );
