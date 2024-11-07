@@ -8,13 +8,14 @@ import './style/index.css' //自定义样式
 // import 'virtual:group-icons.css' //代码组样式
 
 import { h } from 'vue' // h函数
-import { useData , useRoute } from 'vitepress'
+import { useData, useRoute } from 'vitepress'
 // mediumZoom
 import mediumZoom from 'medium-zoom';
 import { onMounted, watch, nextTick } from 'vue';
 
 
 // 组件
+import BlogLive2D from './components/BlogLive2D.vue';
 import MNavLinks from './components/MNavLinks.vue' //导航
 import HomeUnderline from "./components/HomeUnderline.vue" // 首页下划线
 import confetti from "./components/confetti.vue" // 五彩纸屑
@@ -30,28 +31,42 @@ import fluidborder from "./components/fluidborder.vue" //流体边框仅用于�
 // 不蒜子
 import { inBrowser } from 'vitepress'
 import busuanzi from 'busuanzi.pure.js'
-import bsz from "./components/bsz.vue"
+import { withConfigProvider } from './composables/blog';
 
 
 export default {
   extends: DefaultTheme,
-
-  enhanceApp({app , router }) {
+  // Layout: withConfigProvider(BlogLive2D),
+  async enhanceApp({ app, router }) {
+    const { loadOml2d } = await import('oh-my-live2d');
+    loadOml2d({
+      models: [
+        {
+          "path": "https://model.oml2d.com/HK416-1-normal/model.json",
+          "position": [0, 60],
+          "scale": 0.08,
+          "stageStyle": {
+            "height": 450
+          }
+        }
+      ]
+    });
     // 注册全局组件
-    app.component('MNavLinks' , MNavLinks) //导航
-    app.component('HomeUnderline' , HomeUnderline) // 首页下划线
-    app.component('confetti' , confetti) // 五彩纸屑
-    app.component('update' , update) // 更新
-    app.component('xgplayer' , xgplayer) //西瓜播放器
-    app.component('ArticleMetadata' , ArticleMetadata) //字数阅读时间
-    app.component('Linkcard' , Linkcard) //链接卡片
-    app.component('fluidborder' , fluidborder) //流体边框仅用于演示
+    // app.component('BlogLive2D', BlogLive2D) // 二次元看板娘
+    app.component('MNavLinks', MNavLinks) //导航
+    app.component('HomeUnderline', HomeUnderline) // 首页下划线
+    app.component('confetti', confetti) // 五彩纸屑
+    app.component('update', update) // 更新
+    app.component('xgplayer', xgplayer) //西瓜播放器
+    app.component('ArticleMetadata', ArticleMetadata) //字数阅读时间
+    app.component('Linkcard', Linkcard) //链接卡片
+    app.component('fluidborder', fluidborder) //流体边框仅用于演示
 
     // 不蒜子
     if (inBrowser) {
       router.onAfterRouteChanged = () => {
-         busuanzi.fetch()
-       }
+        busuanzi.fetch()
+      }
     }
 
   },
@@ -75,7 +90,7 @@ export default {
 
     return h(MyLayout)
   },
-  
+
   // medium-zoom
   setup() {
     const route = useRoute();
@@ -103,7 +118,7 @@ export default {
       mapping: 'pathname',
       inputPosition: 'bottom',
       lang: 'zh-CN',
-      }, 
+    },
       {
         frontmatter, route
       },

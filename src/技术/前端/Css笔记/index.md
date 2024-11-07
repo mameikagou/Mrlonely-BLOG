@@ -47,3 +47,17 @@ hsl() 函数, 三个参数分别是 色相, 饱和度, 亮度
   }
 }
 ```
+
+## 解决css"背景蒙版" 覆盖了主要内容的问题
+
+nuxt ui主页有个很好看的网格组件: <https://ui.nuxt.com/>
+
+源代码是: <https://github.com/nuxt/ui/blob/dev/docs/pages/index.vue>
+
+一般会出现这个背景蒙版挡住了你的主要显示的内容的情况
+
+解决: 在父元素上加上`relative z-1`(twcss语法)
+
+在子元素加上`relative z-10`
+
+z-index只有position为`relative、absolute、fixed 或 sticky`的时候才会生效
