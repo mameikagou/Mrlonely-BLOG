@@ -56,3 +56,10 @@ sudo systemctl restart docker
 ## 
 构建镜像: docker build -t backend .
 构建服务: docker compose -f compose.yaml up -d
+
+
+## 使用当前构建
+
+```sh
+docker-compose up -build
+```

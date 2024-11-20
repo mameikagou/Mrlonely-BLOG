@@ -7,3 +7,8 @@
 ```sh
 psql -U postgres -d admindashboard
 ```
+
+MongoDB
+```sh
+docker exec -it my-mongo-atlas /bin/bash    
+```
