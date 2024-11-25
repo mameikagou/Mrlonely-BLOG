@@ -38,37 +38,38 @@ export default {
   extends: DefaultTheme,
   // Layout: withConfigProvider(BlogLive2D),
   async enhanceApp({ app, router }) {
-    const { loadOml2d } = await import('oh-my-live2d');
-    loadOml2d({
-      models: [
-        {
-          "path": "https://model.oml2d.com/HK416-1-normal/model.json",
-          "position": [0, 60],
-          "scale": 0.08,
-          "stageStyle": {
-            "height": 450
+    if (typeof window !== 'undefined') {
+      const { loadOml2d } = await import('oh-my-live2d');
+      loadOml2d({
+        models: [
+          {
+            "path": "https://model.oml2d.com/HK416-1-normal/model.json",
+            "position": [0, 60],
+            "scale": 0.08,
+            "stageStyle": {
+              "height": 450
+            }
           }
-        }
-      ]
-    });
-    // 注册全局组件
-    // app.component('BlogLive2D', BlogLive2D) // 二次元看板娘
-    app.component('MNavLinks', MNavLinks) //导航
-    app.component('HomeUnderline', HomeUnderline) // 首页下划线
-    app.component('confetti', confetti) // 五彩纸屑
-    app.component('update', update) // 更新
-    app.component('xgplayer', xgplayer) //西瓜播放器
-    app.component('ArticleMetadata', ArticleMetadata) //字数阅读时间
-    app.component('Linkcard', Linkcard) //链接卡片
-    app.component('fluidborder', fluidborder) //流体边框仅用于演示
+        ]
+      });
+      // 注册全局组件
+      // app.component('BlogLive2D', BlogLive2D) // 二次元看板娘
+      app.component('MNavLinks', MNavLinks) //导航
+      app.component('HomeUnderline', HomeUnderline) // 首页下划线
+      app.component('confetti', confetti) // 五彩纸屑
+      app.component('update', update) // 更新
+      app.component('xgplayer', xgplayer) //西瓜播放器
+      app.component('ArticleMetadata', ArticleMetadata) //字数阅读时间
+      app.component('Linkcard', Linkcard) //链接卡片
+      app.component('fluidborder', fluidborder) //流体边框仅用于演示
 
-    // 不蒜子
-    if (inBrowser) {
-      router.onAfterRouteChanged = () => {
-        busuanzi.fetch()
+      // 不蒜子
+      if (inBrowser) {
+        router.onAfterRouteChanged = () => {
+          busuanzi.fetch()
+        }
       }
     }
-
   },
 
   //导航

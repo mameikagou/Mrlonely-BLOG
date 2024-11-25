@@ -5,7 +5,7 @@
 git reset 是一个强大的 Git 命令，用于重置当前分支的 HEAD 到指定的状态。它有三种主要的模式：--soft、--mixed 和 --hard。下面是它们的详细用法：
 
 
-- git reset --soft <commit>：
+- git reset --soft `<commit>`：
 仅重置 HEAD 到指定的提交。
 暂存区和工作区的更改保持不变。
 常用于撤销最后一次提交，但保留更改以便重新提交。
@@ -14,7 +14,7 @@ git reset 是一个强大的 Git 命令，用于重置当前分支的 HEAD 到�
 git reset --soft HEAD~1
 ```
 
-- git reset --mixed <commit>（默认模式）：
+- git reset --mixed `<commit>`（默认模式）：
 重置 HEAD 到指定的提交。
 重置暂存区，但保留工作区的更改。
 常用于撤销提交并将更改放回工作区，以便进行修改。
@@ -25,7 +25,7 @@ git reset --mixed HEAD~1
 
 
 
-- git reset --hard <commit>：
+- git reset --hard `<commit>`：
 重置 HEAD 到指定的提交。
 重置暂存区和工作区的更改。
 丢弃所有未提交的更改，无法恢复。
@@ -37,7 +37,7 @@ git reset --hard HEAD~1
 
 
 
-- git reset <file>：
+- git reset `<file>`：
 从暂存区中移除指定文件，但保留工作区的更改。
 常用于取消暂存文件。
 
@@ -46,7 +46,7 @@ git reset <file>
 ```
 
 
-- git reset --keep <commit>：
+- git reset --keep `<commit>`：
 类似于 --hard，但会保留与目标提交不冲突的本地更改。
 如果有冲突的更改，重置会失败。
 
@@ -55,7 +55,7 @@ git reset --keep HEAD~1
 ```
 
 
-- git reset --merge <commit>：
+- git reset --merge `<commit>`：
 类似于 --hard，但会保留未合并的更改。
 常用于中止合并操作。
 这些是 git reset 的主要用法，根据需要选择合适的模式来管理你的代码历史和工作区。

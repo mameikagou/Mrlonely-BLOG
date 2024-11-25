@@ -15,8 +15,8 @@ hero:
     #   link: /api-examples
 
 features:
-  # - title: Feature A
-  #   details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    - title: 凡是过往、皆为序章
+      details: 让所有的昨天都过去，也许这会让你好一些
 ---
 
 Hi~ It's mrlonely, This is my blog.
