@@ -13,6 +13,10 @@ git reset 是一个强大的 Git 命令，用于重置当前分支的 HEAD 到�
 ```sh
 git reset --soft HEAD~1
 ```
+> 举例：我在两次提交中上传了敏感信息，如何解决？
+使用`git reset --soft HEAD~2`
+撤销两次commit重新提交
+
 
 - git reset --mixed `<commit>`（默认模式）：
 重置 HEAD 到指定的提交。
