@@ -1,3 +1,4 @@
+```js
 // 1,创建实例; 2,发出http请求; 3,接收服务器传回的数据; 4,更新网页数据
 
 function handleGet(url) {
@@ -16,3 +17,4 @@ function handleGet(url) {
     }
   };
 }
+```
