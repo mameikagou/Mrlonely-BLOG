@@ -1,4 +1,14 @@
-##
+### git log
+
+查看图形化的提交历史：
+```sh
+git log --graph --oneline --all
+```
+
+## git 
+
+### git restore
+// Todo
 
 ### git reset
 
