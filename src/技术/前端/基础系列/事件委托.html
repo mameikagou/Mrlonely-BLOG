@@ -1,0 +1,28 @@
+<body>
+    <button id="btn">点击新增li标签</button>
+    <ul id="list">
+        <li>列表项</li>
+        <li>列表项</li>
+        <li>列表项</li>
+        <li>列表项</li>
+        <li>列表项</li>
+        <li>列表项</li>
+    </ul>
+    
+    <script>
+        var list = document.getElementById('list');
+        var btn = document.getElementById('btn');
+
+        list.onclick = function(e){
+            //点击的子元素
+            e.target.style.color = 'blue';
+        }
+
+        btn.onclick = function(){
+            var new_li = document.createElement('li'); //创建新节点
+            new_li.innerHTML = '新增列表项';//写入内容
+            list.appendChild(new_li);//孤儿节点上树
+
+        }
+    </script>
+</body>

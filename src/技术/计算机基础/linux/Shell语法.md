@@ -49,3 +49,5 @@ echo "请输入目录路径: "
 read directory
 calculate_total_size "$directory"
 ```
+
+$(find "$dictionary" -type f -exec du -b {} \; | awk '{sum += $1} END')

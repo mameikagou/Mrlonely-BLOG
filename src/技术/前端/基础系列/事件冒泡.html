@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="grandfather">
+        祖父元素
+        <div id="father">
+            父元素
+            <div id="son">
+                子元素
+            </div>
+        </div>
+    </div>
+</head>
+
+<body>
+    <script>
+        // 事件冒泡示例
+        const grandfather = document.getElementById('grandfather');
+        const father = document.getElementById('father');
+        const son = document.getElementById('son');
+
+        grandfather.addEventListener('click', (e) => {
+            console.log('grandfather clicked');
+        }, false);
+
+        father.addEventListener('click', (e) => {
+            console.log('father clicked');
+        }, false);
+
+        son.addEventListener('click', (e) => {
+            // 阻止事件冒泡
+            e.stopPropagation();
+            console.log('son clicked');
+        }, false);
+
+        // 点击子元素时的输出顺序：
+        // son clicked
+        // father clicked
+        // grandfather clicked
+    </script>
+</body>
+
+</html>
