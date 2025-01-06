@@ -1,3 +1,5 @@
+
+// 有点寄的，这个题
 async function async1() {
     console.log("async1 start");
     await async2();

@@ -45,7 +45,7 @@ console.log(this)  // undefined
 // 2. 模块导出是引用
 // 3. 保证导出值的正确性
 ```
-gcc –g xxx.c –o xxx 
+
 ```js
 // a.js
 console.log('a.js 开始执行')
