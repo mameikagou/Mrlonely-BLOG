@@ -3,9 +3,7 @@
 layout: home
 
 hero:
-  name: "My Personal Bolg"
-  text: "Blog"
-  tagline: My great project tagline
+  name: "My Personal Blog"
   actions:
     - theme: brand
       text: Start →
