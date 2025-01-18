@@ -32,23 +32,24 @@ var tree2 = {
 const resolve=(tree)=>{
 
     let visited = new Set()
-    let result = []
-    const dfs=(node)=>{
-        if(node.require){
-            for(const dep of node.require){
-                if(!visited.has(dep.name)){
-                    dfs(dep)
-                }
-            }
-        }
+	let result = []
 
-        if(!visited.has(node.name)){
-            visited.add(node.name)
-            result.push(node.name)
-        }
-    }
+	let dfs = (node) => {
+		if(node.require){
+			for(const dep of node.require){
+				if(!visited.has(dep.name)){
+					dfs(dep)
+				}
+			}
+		}
+		if(!visited.has(node.name)){
+			visited.add(node.name)
+			result.push(node.name)
+		}
+	}
 
-    dfs(tree)
-    return result
+	dfs(tree)
+
+	return result
 }
 console.log(resolve(tree2)) // ['C.js', 'E.js', 'D.js', 'B.js', 'A.js', 'page.js']
