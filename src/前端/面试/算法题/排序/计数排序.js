@@ -8,8 +8,8 @@ const main = () => {
 
 const countingSort = (arr) => {
 
-    let cnt = [];
-    let b = [];
+    const cnt = [];
+    const b = [];
     arr.map((item)=>{
         cnt[item] = cnt[item] || 0;
         cnt[item]++;
