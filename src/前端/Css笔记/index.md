@@ -61,3 +61,17 @@ nuxt ui主页有个很好看的网格组件: <https://ui.nuxt.com/>
 在子元素加上`relative z-10`
 
 z-index只有position为`relative、absolute、fixed 或 sticky`的时候才会生效
+
+
+
+
+## 3d 3d-transform
+
+transform-style: preserve-3d; 设置3d的3d效果，一般用于父元素；
+
+在创建 3D 效果的动画或布局时，perspective 是必不可少的，能够在一定程度上模拟真实世界的视觉效果。例如，旋转的盒子或者卡片翻转的效果。
+
+perspective: 1000px;
+
+
+
