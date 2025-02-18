@@ -31,6 +31,28 @@
 
 [text](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/02910cd2c6894bcdb3a9e0fc9e59f4c2~tplv-k3u1fbpfcp-watermark.image?)
 
+
+#### 编译上
+
+使用esbuild来替换bible（编译和代码转换）
+（tsc和bible都比较慢）
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e31ab3a305b54a509471db143d531a10~tplv-k3u1fbpfcp-zoom-1.image)
+
+#### 生产环境上，也要使用Bundle
+使用Rollup主要做这些：
+- css代码分割，便于缓存复用
+- 自动预加载
+- 异步chunk优化
+
+### Esbuild
+主要在这些阶段发力：`依赖预编译`、`TS 语法转译`、`代码压缩`
+快：
+- 使用go语言
+- 从0编写，不用轮子
+- 尽可能复用ast，而不是频繁的解析和传递ast数据
+
+
 ### others
 
 冷启动：冷启动是指项目第一次启动或清除缓存后的启动过程；
