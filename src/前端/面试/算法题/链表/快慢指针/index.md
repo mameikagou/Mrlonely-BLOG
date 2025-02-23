@@ -4,7 +4,7 @@
 
 
 其实没太看懂原理，是一个数学推断；
-这里记一下就行；
+这里记一下就行；动头节点；
 ```ts
 /**
  * Definition for singly-linked list.
