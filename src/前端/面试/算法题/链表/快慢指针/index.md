@@ -3,8 +3,7 @@
 <https://leetcode.cn/problems/linked-list-cycle-ii/>
 
 
-其实没太看懂原理，是一个数学推断；
-这里记一下就行；动头节点；
+快慢指针的方式：
 ```ts
 /**
  * Definition for singly-linked list.
@@ -36,5 +35,22 @@ function detectCycle(head: ListNode | null): ListNode | null {
         }
     }
     return null
+};
+```
+
+或者set直接秒了：
+```ts
+function detectCycle(head: ListNode | null): ListNode | null {
+    
+    let visited = new Set();
+    let cur = head;
+    while(cur){
+        if(visited.has(cur)){
+            return cur
+        }
+        visited.add(cur);
+        cur = cur.next;
+    }
+    return null;
 };
 ```
