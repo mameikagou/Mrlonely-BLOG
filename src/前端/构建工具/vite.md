@@ -1,5 +1,5 @@
 
-
+## vite
 
 ### 工程化需求
 
@@ -11,13 +11,13 @@
 - loader，polyfill, 语法加载(sass)和资源加载(图片等等)
 - hmr热更新
 
-关于vite在这些方面：
+关于vite在这些方面更好：
 - 基于浏览器原生的esm支持实现模块加载； 在开发和生产环境都能将其他格式的产物（如cjs）转为ESM
 - 内置对ts，jsx，sass的支持，也能加载图片
-- 使用terser进行代码混淆，使用Rollup进行打包（webpack是用他自己实现的），使用babel进行代码转译；构建引擎使用esbuild
-- 热更新上，no-bundle，webpack是把所有的模块打包，再启动开发服务器；vite则是直接启动开发服务器，然后按需编译，按需加载；
+- 使用terser进行代码混淆，使用**Rollup**进行打包（webpack是用他自己实现的），使用**babel**进行代码转译；构建引擎使用esbuild
+- 热更新上，no-bundle，webpack是把所有的模块打包，再启动开发服务器；vite则是直接启动开发服务器，然后**按需编译，按需加载**；
 
-注意：no-bundle仅仅针对业务源代码，不针对node_modules里面的依赖代码，对于该代码，依然是整体打包的策略；
+注意：no-bundle仅仅针对业务源代码，不针对`node_modules`里面的依赖代码，对于该代码，依然是整体打包的策略；
 
 ### 依赖预构建
 使用esbuild来做这个事：（webpack则是自研的引擎）
