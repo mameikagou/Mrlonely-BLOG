@@ -4,7 +4,7 @@
 
 #### 1，table组件要考虑哪些方面？比如有一万条数据，你要怎么处理？
 
-答：分页，虚拟滚动懒加载
+答：分页、虚拟滚动懒加载；
 
 #### 2，form组件，里面嵌入了默认值，那你如何实现“虚拟显示”的草稿态跟真实值切换？
 
@@ -13,6 +13,70 @@
 答了localStorage
 
 #### 4. 封装请求库，你要如何实现axios，你要考虑哪些方面？ 二次封装axios，你要考虑哪些方面？知道什么说什么
+
+- 请求拦截和响应拦截，比如统一识别成功的状态码200
+- 全局封装请求，增加埋点信息，增加错误的message，提示以及增加错误埋点；
+- 加一个`controllerMap`, 使用浏览器的`AbortController`增加请求取消的功能；
+
+```typescript
+const controllerMap = new Map()
+
+const addController = (key: string, controller: AbortController) => {
+  controllerMap.set(key, controller)
+}
+
+const cancelRequest = (key: string) => {
+  controllerMap.get(key)?.abort()
+  controllerMap.delete(key)
+}
+
+// 在请求配置中添加
+config.signal = controller.signal
+```
+
+- 增加重试机制
+demo如下：
+
+```ts
+const retryAdapter = (adapter: AxiosAdapter, options: { retry: number }) => {
+  return async (config: AxiosRequestConfig) => {
+    let retryCount = 0
+    const attempt = async (): Promise<any> => {
+      try {
+        return await adapter(config)
+      } catch (error) {
+        if (shouldRetry(error) && retryCount < options.retry) {
+          retryCount++
+          return attempt()
+        }
+        throw error
+      }
+    }
+    return attempt()
+  }
+}
+```
+
+- CSRF防御和XSS防御：
+```typescript
+service.defaults.xsrfCookieName = 'XSRF-TOKEN'
+service.defaults.xsrfHeaderName = 'X-XSRF-TOKEN'
+```
+
+
+```typescript
+const xssFilter = (data: any) => {
+  if (typeof data === 'string') {
+    return data.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  }
+  return data
+}
+
+service.interceptors.request.use(config => {
+  config.data = xssFilter(config.data)
+  return config
+})
+```
 
 #### 5. 一个loading效果，他在页面还没挂载（mounted），组件还没加载出来，你要怎么把loading插入进去？
 
