@@ -62,3 +62,9 @@
 bible：提前用上esm语法的编译器，可以进行语法降级；语法转换器（jsx也是这样的）
 
 Bundle：只把多个模块打包成一个或者多个文件的过程；一般webpack就是按照这种方式的；而vite按需转换，不打包；
+
+
+
+## 插件：
+浅析@vite/plugin-legacy 插件实现与配置应用
+<https://mp.weixin.qq.com/s?__biz=MzI3OTE3ODk4MQ==&mid=2247487788&idx=1&sn=bdfdeffbe7473a0e3857610a160fbcc7&chksm=eb4aeaa6dc3d63b0f9cc3fca914a1852637bfc2de17f1563acc4a31c3645e343b82e8688ec30&cur_album_id=2126792242496405506&scene=189#wechat_redirect>
