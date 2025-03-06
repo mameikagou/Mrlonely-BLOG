@@ -13,7 +13,8 @@ Array.prototype.mymap = function(callback, thisArg){
   for(let i=0;i<this.length;i++){
       // this指向调用时的对象
       if(this.hasOwnProperty(i)){
-          result.push(callback.call(thisArg,this[i],i,this))
+        // this[i] 是当前元素，i 是索引，this 是整个数组
+          result.push(callback.call(thisArg,this[i],i,this)) 
       }
   }
   return result;
