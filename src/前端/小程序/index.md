@@ -1,8 +1,4 @@
-
-
-
-文章
-<https://mp.weixin.qq.com/s?__biz=MzI3OTE3ODk4MQ==&mid=2247487727&idx=1&sn=3e19ba5866173117d2bacb997e5789f5&chksm=eb4aeb65dc3d6273a3c4508cd2c46b9dae1e1a664ce58091d44c403d99b742841cfe00ad25d3&cur_album_id=2126792242496405506&scene=189#wechat_redirect>
+# 
 
 ## onLaunch 全局对象
 
@@ -15,7 +11,7 @@
 ```
 configLoadOK: ƒ ()
 getUserApiInfo: ƒ ()
-globalData: {>
+globalData: {
     apiUserInfoMap: undefined
 desc: "这是app.js的wx.getSystemInfo方法设置的全局信息"
 isConnected: true
