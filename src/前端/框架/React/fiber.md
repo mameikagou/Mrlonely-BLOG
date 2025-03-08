@@ -24,21 +24,21 @@ React依赖管理：
 
 如上图，其中memoizedState就是我们存放hooks数据的地方。它是一个通过 next 串联的链表。
 
-### Fiber是什么？是React新的架构，也是一种新的协调算法；
+### 一些概念：Fiber是什么？是React新的架构，也是一种新的协调算法；
 
 React将渲染过程拆解成了一些Fiber节点
 
 Fiber将更新过程拆解成一些小任务，并且采用一定的**优先级管理**，来决定渲染顺序；
 
-### Fiber的结构：
+#### Fiber的结构：
 
 - 作为静态单元来说，储存了ReactElement的节点信息
 - 作为动态单元来说，它储存了（本次更新相关的信息）节点的变动tag（增加/删除 操作等等）
 
 
-### 如何更新dom？
+#### 如何更新dom？
 
-#### 双缓存
+#### 什么是双缓存？
 
 比如在canvas中，每一帧都要清理上一帧的内容，并且进行下一帧的绘制；如果其中有比较大的间隙，就会出现白屏；
 
@@ -51,6 +51,12 @@ Fiber将更新过程拆解成一些小任务，并且采用一定的**优先级�
 二者的fiber节点通过alternate连接
 
 通过current指针的指向，来完成不同fiber树的切换；
+
+### Scheduler计时器
+`requestIdleCallback`是浏览器提供的一个API，用于在浏览器空闲时执行任务；
+但是它有些缺陷，比如无法准确返回剩余时间，无法设置优先级等等；
+所以React放弃了浏览器的API，自己实现了一个`requestIdleCallbackpolyfill`来作为scheduler；
+这个scheduler有类似于os的那种时间片机制，以此来避免卡顿；
 
 
 ### render阶段（Renconciler, 协调阶段）
