@@ -13,13 +13,13 @@
 sum-minSum 表示minSum到当前sum的最大和
 
 ```js
-// 维护一个最小值即可
+// 维护一个最小值即可, 在用当前值去减最小值就行；
 
 var maxProfit = function(prices) {
 
     const len = prices.length;
 
-    let minSum = Infinity;
+    let minSum = Number.POSITIVE_INFINITY;
     let max = 0;
 
     for(let i=0;i<len;i++){
@@ -55,12 +55,14 @@ function maxSubArray(nums: number[]): number {
 
 ```
 
-本题的dp做法:dp保存最大的子数组和;也比较直接，是正数就加，不是就置为0；
+本题的dp做法:dp保存 “到目前为止的”最大的子数组和;
+
+也比较直接，是正数就加，不是就置为0；
 ```ts
 function maxSubArray(nums: number[]): number {
     if(!nums.length) return 0
-    let dp = [];
-    dp[0] = nums[0];
+    let dp = []; // 这题因为有负数，所以不能提前赋值；直接设置为空就行；
+    dp[0] = nums[0]; // 注意求的是值，不是个数，所以直接设置为第一个元素的大小就行；
 
     const len = nums.length;
 
