@@ -28,3 +28,17 @@
 
 <https://mmbiz.qpic.cn/mmbiz_png/AAQtmjCc74DQYRqcHQW6rs8Eymyia8np2n1OUibb2Ch1a23FcRniaibcRfOdFQ2b2Qa0JyHql5dP2CDIHZO02L6FZQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1>
 
+
+
+### 优点：
+<https://www.cnblogs.com/guxingzhe/p/17587786.html>
+
+- 统一的依赖的管理，统一的工具链以及统一的工具版本，统一的构建流程，统一的发布流程，还有统一的代码风格；
+- 统一的工具，组件，共享函数，逻辑抽离等等促进代码复用；
+- 在用一些内部工具的时候，可以直接使用源码
+- 原子化提交，设计一个业务或者模块的所有更改都能在同一次更改中提交；
+
+### 缺点：
+- 额外鉴权
+- 大体积打包发布有额外开销
+- 可能意外更改其他仓库代码的风险
