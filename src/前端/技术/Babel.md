@@ -7,6 +7,8 @@ Babel的核心：Babel 的核心能力是**语法降级**，以适配老的浏�
 ### 语法降级 与 Babel流程
 语法降级的本质是：AST驱动的代码重构
 
+parse 生成 ast，transform 对 ast 进行转换，generate 打印 ast 成目标代码并生成 sourcemap
+
 流程：
 parse: 解析，构建语法树
 transform: 转换，增加/改动/删除节点；
