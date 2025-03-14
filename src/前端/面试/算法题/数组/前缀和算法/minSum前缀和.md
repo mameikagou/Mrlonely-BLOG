@@ -31,7 +31,7 @@ var maxProfit = function(prices) {
 ```
 
 
-52. 最大子数组和
+[53. 最大子数组和](https://leetcode.cn/problems/maximum-subarray/description/)
 
 经典前缀和，得结合前面的内容才能看懂
 
