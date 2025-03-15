@@ -21,6 +21,3 @@ if (typeof window !== 'undefined') {
   });
 }
 ```
-
-
-### 待补充， vite和webpack的比较

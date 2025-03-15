@@ -15,7 +15,7 @@ React依赖管理：
         - 双缓存Fiber 通过alternate指针切换虚拟dom树
         - 收集effect，构建副作用链表（effect list）
         - 放弃递归，使用循环编写，可中断；
-- 渲染器： Renderer（不同的环境有不同的render， 比如ReactDom， 比如Native）
+- 渲染器： Renderer（不同的环境有不同的render， 比如ReactDom， 比如Native）（批处理， 统一更新）
     - commit阶段
 
 <https://juejin.cn/post/7184747220036485177>
@@ -100,3 +100,32 @@ const performUnitOfWork=(fiber)=>{
 如果有兄弟节点，会**优先更新**兄弟节点；如果没有，则return到父节点；
 
 ### commit阶段
+
+
+
+
+### requestIdleCallback polyfill (Sheduler)
+
+这东西的作用是可以在浏览器空闲的时候执行任务，触发回调；
+
+并且获取剩余时间（timeRemaining()），可以设置优先级；
+
+（这东西，类似于os的设计）
+
+不被使用的原因：
+- 浏览器兼容性问题，而且不同浏览器的实现不一样，而且需要与Reconcile进行精细化的协作；
+- 无法准确返回剩余时间
+- 无法设置优先级，无法实现抢占式调度，（React内部的优先级是 交互 > 动画 > 数据加载）
+需要出现用户点击的时候，当前时间片需要立刻停止，需要抢占式的调度；
+- 避免饥饿，低优先级的任务不会一直被忽略；   
+
+### 为什么要引入Fiber架构？
+
+就是有调度器，可中断的可抢占的具有优先级的调度器；
+
+### React做过哪些优化？（特别像os）
+
+- 双缓存dom树
+- 优先级调度器
+- diff算法优化
+- 异步批处理统一更新
