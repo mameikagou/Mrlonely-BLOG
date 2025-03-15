@@ -35,3 +35,40 @@ Native可以直接通过解析url来获取数据，进行相关的操作；
 // 我们可以自定义JSBridge通信的URL Schema，比如：
 hellobike://showToast?text=hello
 ```
+```java
+// Android端
+webView.setWebViewClient(new WebViewClient() {
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        if (url.startsWith("myapp://")) {
+            // 解析URL参数并执行相应操作
+            Uri uri = Uri.parse(url);
+            String action = uri.getHost();
+            String param = uri.getQueryParameter("param");
+            // 处理相应逻辑
+            return true; // 拦截URL
+        }
+        return super.shouldOverrideUrlLoading(view, url);
+    }
+});
+
+// JS端调用
+location.href = "myapp://showToast?text=hello";
+```
+
+- 安卓平台的webview组件`@JavascriptInterface`也是通过“桥”
+
+```java
+// Android端
+class JsBridge {
+    @JavascriptInterface
+    public void showToast(String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+}
+
+webView.addJavascriptInterface(new JsBridge(), "NativeBridge");
+
+// JS端调用
+window.NativeBridge.showToast("hello");
+```
