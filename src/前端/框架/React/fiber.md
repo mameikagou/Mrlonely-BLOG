@@ -102,14 +102,14 @@ const performUnitOfWork=(fiber)=>{
 ##### beginWork
 
 
-1. 给不同的节点打上不同dom操作类型 tag的标记
+1. 进行虚拟dom diff算法，比较给不同的节点打上不同dom操作类型 tag的标记
 - 如 Placement、Update、Deletion 等
 - 这些标记告诉 commit 阶段需要执行哪些 DOM 操作
 
 2. 同时它也会遍历所有的hook，形成单向链表，挂载到fiber的memorizedState上；
 update的时候，会根据hook的顺序，依次调用；
 
-3. beginWork方法创建子节点，进行虚拟dom diff算法比较；
+3. beginWork方法创建子节点，
 
 4. 根据**当前**节点的tag，调用不同的工作单元函数，来创建节点
 - FunctionComponent：调用函数组件的执行函数，获取返回的ReactElement；
