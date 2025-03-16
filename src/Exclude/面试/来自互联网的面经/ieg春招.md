@@ -52,4 +52,4 @@
 10. vite依赖的esm，如果遇到不支持esm的环境，vite是如何处理的？
 
 不就通过Esbuild转化成esm吗
-
+还有通过插件，polyfill降级机制，比如`@vitejs/plugin-legacy`插件；
