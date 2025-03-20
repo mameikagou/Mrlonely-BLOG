@@ -58,7 +58,7 @@ Fiber将更新过程拆解成一些小任务，并且采用一定的**优先级�
 
 二者的fiber节点通过alternate连接
 
-通过current指针的指向，来完成不同fiber树的切换；
+在mutation之后，通过current指针的指向，来完成不同fiber树的切换；
 
 ### Scheduler计时器
 `requestIdleCallback`是浏览器提供的一个API，用于在浏览器空闲时执行任务；
@@ -105,13 +105,12 @@ const performUnitOfWork=(fiber)=>{
 1. 进行虚拟dom diff算法，比较给不同的节点打上不同dom操作类型 tag的标记
 - 如 Placement、Update、Deletion 等
 - 这些标记告诉 commit 阶段需要执行哪些 DOM 操作
+- beginWork方法创建子节点；
 
 2. 同时它也会遍历所有的hook，形成单向链表，挂载到fiber的memorizedState上；
 update的时候，会根据hook的顺序，依次调用；
 
-3. beginWork方法创建子节点，
-
-4. 根据**当前**节点的tag，调用不同的工作单元函数，来创建节点
+3. 根据**当前**节点的tag，调用不同的工作单元函数，来创建节点
 - FunctionComponent：调用函数组件的执行函数，获取返回的ReactElement；
 - ClassComponent：调用类组件的render方法，获取返回的ReactElement；
 - HostComponent：创建真实DOM节点；
