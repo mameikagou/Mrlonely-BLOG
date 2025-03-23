@@ -1,7 +1,11 @@
 
-## AI Agent在做什么的？
-Agent = LLM(语言模型) + Tools(使用工具) + Memory(记忆) + Plan(规划)
 
+#### AI Agent在做什么的？它是什么？
+Agent = LLM(语言模型) + Tools(使用工具) + Memory(记忆) + Plan(规划)
+MCP（Model Context Protocol）核心是AI模型与外部资源的通信协议，重点偏向于工具的使用；
+Agent则更倾向于自主决策，然后通过MCP来实现工具的使用；
+
+例如，当AI Agent需要读取企业数据库时，MCP会处理身份验证、数据格式转换和传输加密，而Agent专注于判断何时需要该数据及如何利用结果[10][19]。
 
 #### 模型如何使用工具：(跟我个人猜想的一样)
 
