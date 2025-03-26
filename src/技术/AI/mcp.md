@@ -36,3 +36,49 @@ cursor的文档：<https://docs.cursor.com/context/model-context-protocol>
 就是Server单向的推送数据到客户端
 
 - websocket Transport: 通过websocket来进行通信
+
+#### mcp相关的开发库
+`"@modelcontextprotocol/sdk": "^0.1.0",`
+源代码：<https://github.com/modelcontextprotocol/typescript-sdk?tab=readme-ov-file#overview>
+两个常见api：`McpServer`以及`Server`
+
+```ts
+// 高级封装
+new McpServer({ name: string, version: string })
+server.tool(name, description, schema, handler); // schema是参数校验规则
+```
+
+```ts
+  const server = new McpServer(
+    {
+      name: 'vite',
+      version,
+      ...options.mcpServerInfo, // 好像是用来保底的
+    },
+  )
+
+    server.tool(
+    'get-component-tree',
+    'Get the Vue component tree in markdown tree syntax format.',
+    {
+    },
+    async () => {
+      return new Promise((resolve) => {
+        const eventName = nanoid()
+        ctx.hooks.hookOnce(eventName, (res) => {
+          resolve({
+            content: [{
+              type: 'text',
+              text: JSON.stringify(res),
+            }],
+          })
+        })
+        ctx.rpcServer.getInspectorTree({ event: eventName })
+      })
+    },
+  )
+```
+
+```ts
+
+```
