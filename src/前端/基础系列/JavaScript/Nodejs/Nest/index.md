@@ -7,4 +7,4 @@ MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 
 ![alt text](image.png)
 
 
-![alt text](862fa03c-e91e-49ac-a1b6-6ca1f6554698.png)
+![alt text](image2.png)
