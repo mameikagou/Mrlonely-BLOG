@@ -27,3 +27,25 @@
 GRANT ALL PRIVILEGES ON gva.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
 ```
+
+
+进容器连接：
+```zsh
+docker exec -it mysql_server bash
+
+mysql -u root -p
+```
+
+密码错误：
+```zsh
+ docker exec -it mysql_server bash
+root@c8d9114af3bf:/# mysql -u root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+```
+
+删数据卷
+```sh
+docker-compose down
+docker volume rm docker-images_mysql_data
+```
