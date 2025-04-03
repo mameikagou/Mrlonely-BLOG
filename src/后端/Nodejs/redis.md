@@ -11,6 +11,13 @@ redis-cli -h <服务器ip> -p 6379 -n 1 set "captcha_xxx@163.com" "abc123"
 -p 后面是端口号
 -n 后面是数据库的索引号, 默认是0, 这里是1（这里的数据库可以理解成命名空间）
 
+##### 设置redis为单机模式
+
+redis莫名奇妙成从节点了。
+解决方式：
+```sh
+redis-cli -h <redis-server-ip> -p 6379 -n 1 slaveof no one
+```
 
 
 ##### 连不上的排查方案顺序

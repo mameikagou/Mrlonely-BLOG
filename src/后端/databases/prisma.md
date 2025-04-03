@@ -1,4 +1,8 @@
-# schema.prisma
+## Prisma
+
+Prisma 创造了一种 DSL（Domain Specific Language，领域特定语言）。
+
+### schema.prisma
 
 ![alt text](../images/image3.png)
 
