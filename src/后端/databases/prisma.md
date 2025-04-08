@@ -40,3 +40,10 @@ psql -U postgres -d admindashboard -p 5434
 export DATABASE_URL=
 printenv DATABASE_URL
 ```
+
+
+## Sequelize 一种更老牌更成熟的ORM框架
+
+相比于prisma，更适合应用于现有的项目，更成熟更老牌。
+
+prisma更现代化一些。
