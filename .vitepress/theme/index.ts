@@ -15,6 +15,7 @@ import { onMounted, watch, nextTick } from 'vue';
 
 
 // 组件
+import BlendModeDemo from './components/BlendModeDemo.vue';
 import BlogLive2D from './components/BlogLive2D.vue';
 import MNavLinks from './components/MNavLinks.vue' //导航
 import HomeUnderline from "./components/HomeUnderline.vue" // 首页下划线
@@ -62,7 +63,7 @@ export default {
       app.component('ArticleMetadata', ArticleMetadata) //字数阅读时间
       app.component('Linkcard', Linkcard) //链接卡片
       app.component('fluidborder', fluidborder) //流体边框仅用于演示
-
+      app.component('BlendModeDemo', BlendModeDemo)
       // 不蒜子
       if (inBrowser) {
         router.onAfterRouteChanged = () => {
