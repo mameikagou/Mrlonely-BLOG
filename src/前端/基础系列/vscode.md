@@ -31,3 +31,8 @@ true的时候，只有双击才会新建。
 ```json
 "editor.enablePreview":"false"
 ```
+
+tabs重叠
+```json
+"workbench.editor.wrapTabs": true
+```
