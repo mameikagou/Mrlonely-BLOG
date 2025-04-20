@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 自动化Git操作脚本
-# 功能：自动pull, commit, push
+# 功能：自动build, pull, commit, push
 
 # 颜色定义
 GREEN='\033[0;32m'
@@ -20,18 +20,19 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   exit 1
 fi
 
+# 执行pnpm run build
+print_message "正在执行构建..." "$YELLOW"
+if pnpm run build; then
+  print_message "构建成功" "$GREEN"
+else
+  print_message "构建失败，请检查错误信息" "$RED"
+  exit 1
+fi
+
 # 获取当前分支
 current_branch=$(git branch --show-current)
 print_message "当前分支：$current_branch" "$GREEN"
 
-# 拉取最新代码
-print_message "正在拉取最新代码..." "$YELLOW"
-if git pull; then
-  print_message "拉取成功" "$GREEN"
-else
-  print_message "拉取失败，可能有冲突需要解决" "$RED"
-  exit 1
-fi
 
 # 检查是否有变更需要提交
 if [[ -z $(git status -s) ]]; then
@@ -54,6 +55,15 @@ if git commit -m "$commit_message"; then
   print_message "提交成功" "$GREEN"
 else
   print_message "提交失败" "$RED"
+  exit 1
+fi
+
+# 拉取最新代码
+print_message "正在拉取最新代码..." "$YELLOW"
+if git pull; then
+  print_message "拉取成功" "$GREEN"
+else
+  print_message "拉取失败，可能有冲突需要解决" "$RED"
   exit 1
 fi
 
