@@ -1,13 +1,14 @@
 
 
 ### 饮食
-(看这个视频)[https://www.bilibili.com/video/BV1Rh4y1c7s9/?spm_id_from=333.337.search-card.all.click&vd_source=9529002c63d8eefaf57e87e2c8193594]
+[看这个视频](https://www.bilibili.com/video/BV1Rh4y1c7s9/?spm_id_from=333.337.search-card.all.click&vd_source=9529002c63d8eefaf57e87e2c8193594)
 
 
 - 低热量饮食：
     - 简单来说就是只吃大自然中正常生产的食物，不吃深加工的食物
     - 轻断食，比如：16+8轻断食（每天只在八个小时里面进食，12：00 - 20：00）
 - 运动：占比其实不高；（怪不得瑶姐那么廋）
+    - 保持运动习惯（胰岛素敏感度）
     - 运动一个小时消耗的热量你多吃几口就回来了
     - 早上空腹有氧运动
         - 爬坡的效果比跑更好（坡度15，其他的随意）
@@ -17,3 +18,4 @@
 
 
 那水果怎么吃？
+那蛋白粉呢？
