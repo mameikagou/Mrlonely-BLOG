@@ -45,7 +45,7 @@ print_message "以下文件有变更:" "$YELLOW"
 git status -s
 
 # 询问提交信息
-read -p "请输入提交信息 (默认: 'Update files'): " commit_message
+# read -p "请输入提交信息 (默认: 'Update files'): " commit_message
 commit_message=${commit_message:-"Update files"}
 
 # 添加所有变更并提交
