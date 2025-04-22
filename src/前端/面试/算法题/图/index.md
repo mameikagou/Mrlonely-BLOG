@@ -10,6 +10,8 @@ function canFinish(numCourses: number, prerequisites: number[][]): boolean {
     // 然后从该节点开始查询，一边查询，一边把新产生的符合条件的节点放进去；
 
     const ingree = new Array(numCourses).fill(0);
+    // amap[i] 代表课程 i 的所有后继课程（依赖于课程 i 的课程）;
+    // amap[i][j] 表示依赖于i的第j个课程编号;
     const amap: number[][] = Array.from({ length: numCourses }, () => []);
 
     for (let i = 0; i < prerequisites.length; i++) {
