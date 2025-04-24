@@ -20,19 +20,35 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   exit 1
 fi
 
-# 执行pnpm run build
-print_message "正在执行构建..." "$YELLOW"
-if pnpm run build; then
-  print_message "构建成功" "$GREEN"
+# 检查Node版本
+print_message "检查Node版本..." "$YELLOW"
+# 获取Node版本号（移除v前缀）
+node_version=$(node -v | sed 's/^v//')
+required_version="18.12.0"
+
+# 比较版本号函数
+version_gt() { 
+  test "$(printf '%s\n' "$1" "$2" | sort -V | head -n 1)" != "$1"
+}
+
+if version_gt "$node_version" "$required_version" || [ "$node_version" = "$required_version" ]; then
+  print_message "Node版本 v$node_version 满足要求，将执行构建步骤" "$GREEN"
+  
+  # 执行pnpm run build
+  print_message "正在执行构建..." "$YELLOW"
+  if pnpm run build; then
+    print_message "构建成功" "$GREEN"
+  else
+    print_message "构建失败，请检查错误信息" "$RED"
+    exit 1
+  fi
 else
-  print_message "构建失败，请检查错误信息" "$RED"
-  exit 1
+  print_message "Node版本 v$node_version 低于要求的 v$required_version，跳过构建步骤" "$YELLOW"
 fi
 
 # 获取当前分支
 current_branch=$(git branch --show-current)
 print_message "当前分支：$current_branch" "$GREEN"
-
 
 # 检查是否有变更需要提交
 if [[ -z $(git status -s) ]]; then

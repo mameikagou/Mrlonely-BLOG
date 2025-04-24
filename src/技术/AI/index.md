@@ -16,3 +16,7 @@ vue的map插件，通过vite以及Rollup的功能，来辅助cursor的时候（�
 
 deepseek集成工具大全：
 <https://github.com/deepseek-ai/awesome-deepseek-integration>
+
+
+本地搭建知识库：
+<https://github.com/modelcontextprotocol/servers/tree/main/src/memory>

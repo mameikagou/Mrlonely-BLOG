@@ -42,6 +42,8 @@ cursor的文档：<https://docs.cursor.com/context/model-context-protocol>
 源代码：<https://github.com/modelcontextprotocol/typescript-sdk?tab=readme-ov-file#overview>
 两个常见api：`McpServer`以及`Server`
 
+example：<https://github.com/modelcontextprotocol/server-everything/blob/main/src/everything.ts>
+
 ```ts
 // 高级封装
 new McpServer({ name: string, version: string })
@@ -79,6 +81,20 @@ server.tool(name, description, schema, handler); // schema是参数校验规则
   )
 ```
 
-```ts
 
+
+当我们在cursor中进行如下配置的时候，cursor会自动启动一个mcp server，并且将这个server注册到mcp协议中，这样我们就可以在cursor中使用这个server了。
+这个server会从npm下载，并且存在一个临时目录中，-y表示自动确认安装。
+```json
+{
+  "mcpServers": {
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-everything"
+      ]
+    }
+  }
+}
 ```
