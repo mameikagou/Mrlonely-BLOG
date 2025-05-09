@@ -12,3 +12,7 @@
 
 生成（Generation）：
 基于检索到的信息和自身知识库，生成最终答案（并标注来源）。
+
+
+#### 检索召回？
+检索召回（Retrieval）是 RAG（Retrieval-Augmented Generation）系统中的关键步骤，指的是从大量文档中找出与用户查询相关的文档片段的过程。k
