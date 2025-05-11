@@ -74,11 +74,11 @@ func minHeapify(nums []int, i int){
     left := 2*i + 1
     right := 2*i + 2
 
-    if k < len(nums) && nums[left] < nums[smallest]{
+    if left < len(nums) && nums[left] < nums[smallest]{
         smallest = left;
     }
 
-    if k < len(nums) && nums[right] < nums[smallest]{
+    if right < len(nums) && nums[right] < nums[smallest]{
         smallest = right;
     }
 
