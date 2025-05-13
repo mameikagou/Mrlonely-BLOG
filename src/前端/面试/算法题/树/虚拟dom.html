@@ -13,25 +13,163 @@
             tag: "div",
             attrs: {
                 id: "app",
+                className: "container",
             },
-            children: [{
-                tag: "h1",
-                attrs: {
-                    className: "title",
+            children: [
+                // 标题区
+                {
+                    tag: "h1",
+                    attrs: {
+                        className: "title",
+                    },
+                    children: ["虚拟DOM渲染测试"]
                 },
-                children: [
-                    "俺是一个标题",
-                ],
-            }, {
-                tag: "ul",
-                children: [{
-                    tag: "li",
-                    children: ["苹果", "香蕉"],
-                }, {
-                    tag: "li",
-                    children: ["土豆", "白菜"],
-                }],
-            }],
+
+                // 卡片1：表格数据
+                {
+                    tag: "div",
+                    attrs: {
+                        className: "card",
+                    },
+                    children: [
+                        {
+                            tag: "h2",
+                            children: ["表格数据"]
+                        },
+                        {
+                            tag: "table",
+                            children: [
+                                {
+                                    tag: "thead",
+                                    children: [{
+                                        tag: "tr",
+                                        children: [
+                                            { tag: "th", children: ["ID"] },
+                                            { tag: "th", children: ["名称"] },
+                                            { tag: "th", children: ["价格"] }
+                                        ]
+                                    }]
+                                },
+                                {
+                                    tag: "tbody",
+                                    children: [
+                                        {
+                                            tag: "tr",
+                                            children: [
+                                                { tag: "td", children: ["1"] },
+                                                { tag: "td", children: ["苹果"] },
+                                                { tag: "td", children: ["¥5.00"] }
+                                            ]
+                                        },
+                                        {
+                                            tag: "tr",
+                                            attrs: { className: "highlight" },
+                                            children: [
+                                                { tag: "td", children: ["2"] },
+                                                { tag: "td", children: ["香蕉"] },
+                                                { tag: "td", children: ["¥3.50"] }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                // 卡片2：图片和列表
+                {
+                    tag: "div",
+                    attrs: {
+                        className: "card",
+                    },
+                    children: [
+                        {
+                            tag: "h2",
+                            children: ["图片和列表"]
+                        },
+                        {
+                            tag: "img",
+                            attrs: {
+                                src: "https://via.placeholder.com/300x150",
+                                alt: "测试图片",
+                                style: "max-width: 100%; border-radius: 4px;"
+                            }
+                        },
+                        {
+                            tag: "h3",
+                            children: ["嵌套列表:"]
+                        },
+                        {
+                            tag: "ul",
+                            children: [
+                                {
+                                    tag: "li",
+                                    children: [
+                                        "水果",
+                                        {
+                                            tag: "ul",
+                                            children: [
+                                                { tag: "li", children: ["苹果"] },
+                                                { tag: "li", children: ["香蕉"] }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    tag: "li",
+                                    children: [
+                                        "蔬菜",
+                                        {
+                                            tag: "ul",
+                                            children: [
+                                                { tag: "li", children: ["土豆"] },
+                                                { tag: "li", children: ["白菜"] }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+
+                // 卡片3：特殊元素
+                {
+                    tag: "div",
+                    attrs: {
+                        className: "card",
+                    },
+                    children: [
+                        {
+                            tag: "h2",
+                            children: ["特殊元素"]
+                        },
+                        {
+                            tag: "blockquote",
+                            attrs: { style: "border-left: 3px solid #ccc; padding-left: 10px; color: #666;" },
+                            children: [
+                                {
+                                    tag: "p",
+                                    children: ["这是一段引用文字"]
+                                }
+                            ]
+                        },
+                        {
+                            tag: "p",
+                            children: [
+                                "这是普通文字和",
+                                {
+                                    tag: "span",
+                                    attrs: { className: "highlight" },
+                                    children: ["高亮文字"]
+                                },
+                                "的混合"
+                            ]
+                        }
+                    ]
+                }
+            ]
         };
 
         //   思路就是：处理当前节点，递归遍历子节点
