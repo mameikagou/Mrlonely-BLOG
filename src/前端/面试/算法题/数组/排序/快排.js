@@ -26,4 +26,4 @@ const partition = (arr, left, right) =>{
     return i+1
 }
 
-console.log(quickSort([10, 7, 8, 9, 1, 5]))
+console.log(quickSort([4, 2, 7, 1, 3, 6, 5]))
