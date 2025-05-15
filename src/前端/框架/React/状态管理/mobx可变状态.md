@@ -14,6 +14,18 @@
 
 - 使用Proxy实现，有时候比较黑盒，不好排查。
 
+##### example：
+这样写了之后，只有整体替换了role之后，才会更新；更改其中的小属性，不会。
+```ts
+role: types.optional(types.frozen<Partial<Response['role']>>(), {}),
+```
+还是会整体更新，保证事务的完整
+```ts
+self.role = {
+    ...self.role,
+    ...newRole
+}
+```
 
 #### 更加精确的reactive
 <https://reactive.formilyjs.org/zh-CN>
