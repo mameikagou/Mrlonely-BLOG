@@ -102,3 +102,18 @@ git reset --hard origin/master
 可以revert到某次commit
 
 `git revert <git log id>`
+
+##### 最佳实践
+使用特定提交或标签而非分支名：
+
+```sh
+# 进入子模块目录
+cd shared-lib
+# 切换到特定提交
+git checkout v1.2.3  # 或特定的commit hash
+# 回到主仓库并提交这个更改
+cd ..
+git add shared-lib
+git commit -m "Lock shared-lib to version v1.2.3"
+```
+
