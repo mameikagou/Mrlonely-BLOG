@@ -1,5 +1,10 @@
 
 /**
+ * zustand源码 zustand实现原理
+ */
+
+
+/**
  * 一个api，这里的先声明出来替代。作用是方便订阅外部存储，通过 selector 和 equalityFn 实现按需更新，避免无效渲染；同时有ssr支持。
  * @param subscribe 订阅函数：api.subscribe。
  * @param getClientState 获取客户端状态：api.getState。
