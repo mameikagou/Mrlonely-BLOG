@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+
+- 所有的公式都用latex表示，要有解析前后的两种文本，分别是容易复制的和人脑容易读的
