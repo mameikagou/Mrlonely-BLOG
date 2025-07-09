@@ -19,4 +19,5 @@ Tapable事件流程很简单：
 
 - SyncHook 同步hook，就按照注册顺序依次调用回调
 - SyncBailHook 同步熔断钩子 ：`bail` 类型钩子的特点是在回调队列中，若任一回调返回了非 `undefined` 的值，则中断后续处理，直接返回该值，
+
 ### loader
