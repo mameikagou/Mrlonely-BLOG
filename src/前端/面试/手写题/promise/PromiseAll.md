@@ -1,4 +1,4 @@
-# 手写 PromiseAll
+# 手写 PromiseAll Promise.all
 
 最直接的思路, 依次执行即可; 不能用 push, 因为返回的时间不好控制;
 
