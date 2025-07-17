@@ -91,27 +91,31 @@ bilibili:<https://www.bilibili.com/video/BV1mG4y1A7Gu/?vd_source=9529002c63d8eef
 
 ```ts
 // ts中不方便直接删除一个元素，所以用一个数组来做标记
-function permute(nums: number[]): number[][] {
+var permute = function(nums) {
+    
+    let path = [];
+    let ans = [];
     const len = nums.length;
-    const res: number[][] = [];
-    const path:number[] = [];
-    const used: boolean[] = new Array(len).fill(false);
+    const used = Array.from({length:len},()=>false)
 
-    const dfs = (i:number) =>{
-        if(i===len){
-            res.push([...path])
+    const dfs = (i) => {
+        if(len === i){
+            ans.push(path.slice())
         }
-        for(let j=0;j<len;j++){
+        for(let j=0;j<nums.length;j++){
             if(used[j]) continue;
-            path[i] = nums[j];
-            used[j] = true;
 
+            path.push(nums[j]);
+            used[j] = true;
+            
             dfs(i+1);
-            // 回溯
+            
+            path.pop();
             used[j] = false;
         }
     }
-    return res;
-}
+    dfs(0)
+    return ans
+};
 
 ```
