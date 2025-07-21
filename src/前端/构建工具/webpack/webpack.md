@@ -1,5 +1,5 @@
 
-### webpack生命周期
+### webpack 整体生命周期
 
 - 初始化阶段：主要是加载compiler等基础对象以及plugin插件，最终找到entry入口模块
 - 构建阶段：从entry开始，
@@ -8,8 +8,15 @@
   - 递归遍历所有依赖，构建模块依赖关系图
 - 生成阶段：封装chunk模块
 
+### webpack&vite 模块的处理流程（流水线）
+- webpack （解析转换依赖优化生成）
+ - Entry → Resolve → Load → Transform → Parse → Optimize → Generate → Output
+- vite 
+ - 开发：Entry → Native ESM → Transform on demand → HMR
+ - 生产：Entry → Rollup bundling → Transform → Optimize → Output
+
 ### loader
-只负责加载
+只负责加载，一般都是loader进行Transform工作
 
 ### 插件 plugin
 涉及全生命周期

@@ -5,7 +5,7 @@
 
 ```js
 const PromiseAll = (tasks) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { //这样包裹是为了方便then
     const arr = Array.form(tasks);
     const len = arr.length;
 
@@ -102,4 +102,27 @@ PromiseAll(promises4)
   .catch((error) => {
     console.error(error);
   });
+```
+
+
+
+```js
+const promiseAll = (promises) =>{
+  return new Promise((res,rej)=>{
+    const len = promises.length;
+    const arr = Array.from(promises);
+    let ans = [];
+    let count = 0
+    for(let i=0;i<len;i++ ){
+      Promise.resolve(arr).then((item)=>{
+          ans[i] = item
+          
+          if(++count === len){
+            res(ans)
+          }
+      })
+    }
+  })
+}
+
 ```
