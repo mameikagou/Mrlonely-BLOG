@@ -21,7 +21,7 @@ csrf token的原理是
 收到浏览器同源策略的限制，攻击者在恶意网站无法获取到可信网站的token。
 服务端服务端自己不存储 CSRF-Token，会比较cookie中和http头中的token是否一致。
 
-#### ocalStorage、sessionStorage、Cookie 的区别
+#### localStorage、sessionStorage、Cookie 的区别
 
 | 特性 | Cookie | localStorage | sessionStorage |
 | :--- | :--- | :--- | :--- |
@@ -31,5 +31,8 @@ csrf token的原理是
 | **作用域** | 同源下的所有窗口和标签页共享 | 同源下的所有窗口和标签页共享 | 仅在当前浏览器标签页内有效，不同标签页不共享 |
 | **API 易用性** | 需手动封装，操作繁琐 | 提供 `setItem`, `getItem` 等原生 API，简单易用 | 与 localStorage API 相同 |
 - localstorage 和 sessionstorage 区别
-    - 是否会自动清除呗
-- 同一个站点 localstorage 超出最大容量，别人影响了你，导致你存不进去了，这样怎么解决
+    - 是否会自动清除
+    - 标签页是否共享
+- 同一个站点 localstorage 超出最大容量，别人影响了你，导致你存不进去了，这样怎么解决？
+    - 从项目管理的角度：使用约定式的前缀，定好一个key，区分来自于哪个页面或者是哪个业务，然后对他进行管理，也就是沟通后，让别人清除。
+    - 从技术角度：使用一个第三方库，比如 `localforage`，他可以自动管理存储空间，当超出最大容量时，会自动清除旧的存储。
