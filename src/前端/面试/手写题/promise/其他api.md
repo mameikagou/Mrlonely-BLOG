@@ -1,4 +1,5 @@
 
+```js
 1. Promise.race
 返回第一个完成（成功或失败）的 Promise：
 jsApplyCancelconst PromiseRace = (promises) => {
@@ -296,3 +297,4 @@ PromiseReject('something wrong').catch(console.error); // 输出: something wron
 核心区别总结
 API成功条件失败条件特点Promise.all全部成功任意失败快速失败，保序返回Promise.race第一个完成第一个失败竞速模式Promise.allSettled总是成功从不失败容错模式，返回状态Promise.any任意成功全部失败容错模式，第一个成功Promise.resolve立即成功-值转 PromisePromise.reject-立即失败创建失败 Promise
 这些实现帮你深入理解 Promise 的并发控制和状态管理机制！每个 API 都有其特定的使用场景。
+```
