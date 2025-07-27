@@ -63,3 +63,45 @@ class Solution:
                 right = mid
         return left # 在求最大的题目中， check(mid) == true 时更新的是谁，最后就返回谁。
 ```
+
+300. 最长递增子序列 <https://leetcode.cn/problems/longest-increasing-subsequence/description/>
+
+二分+贪心写法
+
+二分查找模板是 while(left + 1 < right)。这个模板在循环结束后：
+left 指向的是 小于 num 的最后一个元素。
+right 指向的是 大于或等于 num 的第一个元素。
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var lengthOfLIS = function(nums) {
+    if (!nums || nums.length === 0) {
+        return 0; // 返回整数 0，而不是 null
+    }
+
+    const tail = [];
+    for(const num of nums){ // 很巧妙，是在nums的子数组当中找
+        
+        let left =-1,right=tail.length+1;
+        
+        while(left+1<right){
+            const mid = (left+right)>>1
+            if(tail[mid]<num){
+                left=mid; // 结束后的left：小于num的最后一个元素的索引
+            }else{
+                right=mid; // 结束后的right：大于等于num的第一个元素的索引；
+            }
+        }
+        
+        if(left === tail.length){
+            tail.push(num)
+        }else{
+            tail[right] = num;  // 所以这样替换之后，值会更小；
+        }
+    }
+    return tail.length;
+};
+```
