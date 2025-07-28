@@ -107,22 +107,25 @@ PromiseAll(promises4)
 
 
 ```js
-const promiseAll = (promises) =>{
-  return new Promise((res,rej)=>{
-    const len = promises.length;
-    const arr = Array.from(promises);
-    let ans = [];
-    let count = 0
-    for(let i=0;i<len;i++ ){
-      Promise.resolve(arr).then((item)=>{
-          ans[i] = item
-          
-          if(++count === len){
-            res(ans)
-          }
-      })
-    }
-  })
-}
+const PromiseAll = (promises) => {
 
+  let arr = Array.from(promises);
+
+  const len = arr.length;
+
+  let count = 0;
+
+  let res = [];
+   return new Promise((resolve, reject)=>{
+    for(let i=0;i<arr.length;i++){
+
+      Promise.resolve(arr[i]).then((item)=>{
+        res[i] = item;
+        if(++count === len){
+          resolve()
+        }
+      }).catch(()=>reject())
+    }
+   })
+}
 ```
