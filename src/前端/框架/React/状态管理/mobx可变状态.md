@@ -27,5 +27,8 @@ self.role = {
 }
 ```
 
-#### 更加精确的reactive
+#### Formily 表单 响应式更新。更加精确的reactive
 <https://reactive.formilyjs.org/zh-CN>
+
+##### 原理
+- 原理还是 订阅发布模式，最小化更新。
