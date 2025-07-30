@@ -30,3 +30,48 @@ const mergeSort = (arr) => {
 }
 
 console.log(mergeSort([4, 2, 7, 1, 3, 6, 5]))
+
+
+
+
+
+
+
+
+
+
+
+
+const merge2 = (leftArr, rightArr) =>{
+
+    let leftIndex = 0;
+    let rightIndex = 0;
+    let result = [];
+
+    while(leftIndex < leftArr.length && rightIndex < rightArr.length){
+        if(leftArr[leftIndex] < rightArr[rightIndex]){
+            result.push(leftArr[leftIndex]);
+            leftIndex++;
+        }else{
+            result.push(rightArr[rightIndex]);
+            rightIndex++;
+        }
+    }
+
+    return result.concat(leftArr.slice(leftIndex),rightArr.slice(rightIndex));
+}
+
+const mergeSort2 = (arr) => {
+    if(arr.length <= 1){
+        return arr
+    }
+
+    const mid = arr.length >> 1;
+    const left = arr.slice(0,mid);
+    const right = arr.slice(mid);
+
+    return merge2(mergeSort2(left), mergeSort2(right));
+}
+
+
+console.log(mergeSort2([4, 2, 7, 1, 3, 6, 5]))

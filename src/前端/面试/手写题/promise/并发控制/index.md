@@ -8,7 +8,7 @@
 class superTask {
     max
     tasks
-
+    
     constructor(max){
         this.max = max;
         this.tasks = [];
@@ -34,3 +34,5 @@ class superTask {
 }
 
 ```
+
+应用层 -> 表示层(加解密) -> 会话层(Session) -> 传输层(TCP/UDP) -> 网络层(IP) -> 数据链路层(MAC，数据帧) -> 物理层(网线)

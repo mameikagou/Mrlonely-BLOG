@@ -94,10 +94,9 @@ Authorization: Bearer xxxxx.xxxxx.xxxx
 2. **主动刷新**：Access Token 快要过期时提前刷新
 
 ### 刷新机制
-1. **检测过期**：客户端检测到 Access Token 过期或即将过期
-2. **使用 Refresh Token**：向认证服务器发送刷新请求
+1. **检测过期**：客户端检测到 Access Token 过期或即将过期，返回401未授权访问。
+2. **使用 Refresh Token**：向认证服务器发送刷新请求（一般直接放在httponly的cookie中，每次请求都会自动带上）
 3. **获取新 Token**：服务器验证 Refresh Token 后返回新的 Access Token
-4. **Token 轮换**：同时生成新的 Refresh Token，旧的立即失效
 5. **重试请求**：使用新 Token 重新发送原始请求
 
 ## 企业级应用中的 Token 类型
@@ -135,11 +134,6 @@ Authorization: Bearer xxxxx.xxxxx.xxxx
 4. **返回响应**：返回新的 Token 对
 5. **客户端更新**：更新本地存储的 Token
 
-#### 安全考虑
-- **并发控制**：防止多个请求同时触发刷新
-- **异常处理**：Refresh Token 过期时引导用户重新登录
-- **监控告警**：异常刷新行为的检测和处理
-
 ## 最佳实践
 
 ### 安全存储
@@ -147,10 +141,5 @@ Authorization: Bearer xxxxx.xxxxx.xxxx
 - **Refresh Token**：存储在 HttpOnly Cookie 中，防止 XSS 攻击
 - **CSRF Token**：嵌入表单或请求头中
 
-### 多层防护
-- 结合多种认证机制
-- 实施内容安全策略（CSP）
-- 定期轮换和更新 Token
-- 监控异常访问行为
 
 ![alt text](image.png)
