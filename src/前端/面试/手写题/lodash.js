@@ -25,6 +25,7 @@ const get2 = (object, path, defaultValue) => {
     return result === undefined ? defaultValue : result;
 };
 
+
 // 示例用法：
 const obj = {
     a: {
