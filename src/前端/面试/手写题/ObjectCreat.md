@@ -22,13 +22,19 @@ obj.__proto__ = MyFunction.prototype
 ```js
 
 const new2 = (constructor, ...args) => {
-    // 第 1 步 和 第 2 步：创建一个新对象，并链接好原型
-    const obj = Object.create(constructor.prototype);
+    // 第 1 步 和 第 2 步：创建一个新对象，并新对象的原型链接到构造函数的prototype
+    const obj = Object.create(constructor.prototype);// Object.create传入的是proto
 
-    // 第3步：绑定this，执行构造函数
+    // 第3步：绑定this到对象上，并执行。
     const result = constructor.apply(obj, args);
 
-    // 第4步：判断返回值
+    // 第4步：判断返回值，new的特性，构造函数有return就返回return，没有return就返回新创建的对象。
     return typeof result === 'object' ? result : obj;
 }
 ```
+
+new（ `new Constructor()` ） 和 Object.create一体两面，
+
+Object.create传的是proto，new传的是constructor
+
+new Constructor()是创建一个构造函数的实例、Object.create(proto)创建的是一个空对象。
