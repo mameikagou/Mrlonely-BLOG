@@ -1,3 +1,8 @@
+
+#### URL从输入到显示会发生什么？
+MDN的解释：https://developer.mozilla.org/zh-CN/docs/Web/Performance/Guides/How_browsers_work
+
+
 #### 用户退出重定向到登录如何规划逻辑?
 
 - 前端
@@ -38,3 +43,6 @@ csrf token的原理是
     - 从技术角度：使用一个第三方库，比如 `localforage`，他可以自动管理存储空间，当超出最大容量时，会自动清除旧的存储。
 
 #### 双token的两个token分别是做什么的？
+
+一个获取数据，一个用于获取前一个token。
+一般返回的时候都会刷新，如何refresh

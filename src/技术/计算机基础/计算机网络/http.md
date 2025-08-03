@@ -1,5 +1,12 @@
 
-#### http
+HTTP/1 -> HTTP/1.1：默认开启 `Connection: keep-alive` 支持长连接与 TCP 连接复用
+
+HTTP/1.1 -> HTTP/2：二进制协议，支持了 HPACK(Huffman) Header 压缩，支持多路复用，与长连接（1.1只支持整体传输，而 HTTP/2 支持分帧传输）。支持了服务端推送，在客户端请求之前推送资源
+
+HTTP/2 -> HTTP/3：基于 QUIC 实现，拥有 QUIC 的优点：连接迁移、高效拥塞控制
+
+
+#### http123
 
 揭秘http2：<https://mp.weixin.qq.com/s/tG6HPSuGEOxpS9lq-Q_uLg>
 

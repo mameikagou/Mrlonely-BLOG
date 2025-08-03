@@ -1,4 +1,6 @@
 
+<https://jiangjingmin.github.io/posts/fe/es6/generator.html#%E4%B8%80%E3%80%81%E4%BB%8B%E7%BB%8D>
+
 # Generator
 
 Generator是一个状态机函数，拥有异步机制，每次执行遇到yield时候会中断，遇到next()函数才继续会执行；
