@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="virtual-list-container">
+        <div id="phantom-list"></div>
+        <div id="visible-list"></div>
+    </div>
+</body>
+<script>
+    const container = document.getElementById('virtual-list-container');
+    const phantomList = document.getElementById('phantom-list');
+    const visibleList = document.getElementById('visible-list');
+
+    const itemHeight = 50;
+
+    const visibleCount = Math.ceil(container.clientHeight / itemHeight);
+
+
+    let startOffset = 0;
+    let startIndex = 0;
+
+    let endIndex = startIndex + visibleCount;
+    
+    container.addEventListener('scroll', scrollListener);
+
+    const scrollListener = () => {
+        requestAnimationFrame(()=>{
+            const scrollTop = container.scrollTop;
+            console.log("scrollTop",scrollTop);
+            startIndex = Math.floor(scrollTop/itemHeight);
+
+            endIndex = startIndex + visibleCount;
+            
+            // 计算列表的 translateY 偏移量，使其“滚动”到正确的位置
+            startOffset = scrollTop - (scrollTop%itemHeight);
+
+            renderVisibleList();
+        })
+    }
+
+    const renderVisibleList=()=>{
+        const visibleData = listData.slice(startIndex, Math.min(endIndex, totalCount));
+
+        visibleList.style.transform = `translateY(${startOffset}px)`
+
+        // 3. 生成 HTML 字符串，一次性更新 DOM (比逐条 append 性能好)
+        let html = '';
+        for (const item of visibleData) {
+            html += `<div class="list-item">${item.text}</div>`;
+        }
+        visibleList.innerHTML = html;
+    }
+
+</script>
+</html>
