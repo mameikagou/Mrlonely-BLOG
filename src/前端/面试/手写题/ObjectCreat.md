@@ -25,7 +25,7 @@ const new2 = (constructor, ...args) => {
     // 第 1 步 和 第 2 步：创建一个新对象，并新对象的原型链接到构造函数的prototype
     const obj = Object.create(constructor.prototype);// Object.create传入的是proto
 
-    // 第3步：绑定this到对象上，并执行。
+    // 第3步：绑定constructor的this到obj上，并执行。就是把构造函数的内容，加到空对象obj上。
     const result = constructor.apply(obj, args);
 
     // 第4步：判断返回值，new的特性，构造函数有return就返回return，没有return就返回新创建的对象。
