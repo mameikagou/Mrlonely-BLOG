@@ -15,6 +15,14 @@
  - 开发：Entry → Native ESM → Transform on demand → HMR
  - 生产：Entry → Rollup bundling → Transform → Optimize → Output
 
+### HMR
+  - webpack：
+    - 先打包，构建一套自己的依赖系统
+    - 然后遍历更新的模块及其依赖，列一个变更清单，针对每一个变更发送最新的请求。
+  - vite
+    - esm原生支持import，所以不用打包。
+    - 就启动一个websocket，通过esm故而无需打包，按需取用。文件有变更就通过import按照时间戳去请求最新的文件，然后自己按需编译就行。
+
 ### loader
 只负责加载，一般都是loader进行Transform工作
 

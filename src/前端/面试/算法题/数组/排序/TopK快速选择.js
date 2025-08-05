@@ -25,9 +25,9 @@ const findKthLargest = (arr,k,left=0,right=arr.length-1)=>{
     if(rank === k ){
         return arr[pivot]
     }
-    else if(rank > k){
+    else if(rank > k){ // 目的是，找第k大的人。pivot是第rank大的元素。
         return findKthLargest(arr ,k ,left ,pivot-1)
-    }else{
+    }else{ // 如果k更多，那就去另一边找。
         return findKthLargest(arr ,k-rank ,pivot+1 ,right)
     }
 }
@@ -107,4 +107,70 @@ const findKthSmallest = (input_arr, k) => {
         }
     }
     return null; // 理论上对于有效的k不会执行到这里
+}
+
+
+
+
+// 寻找最大的K个
+
+const findKLargestArgs = (nums, k) => {
+
+    const arr = nums.slice();
+    if(k>=arr.length){
+        return arr.sort((a,b)=>b-a);
+    }
+    let left = 0;
+    let right = arr.length - 1;
+
+    let targetIndex = k-1;
+
+    while(left <= right){
+
+        const pivotIndex = partition(arr, left,right);
+
+        if(targetIndex === pivotIndex){
+            return;
+        } else if(pivotIndex>targetIndex){
+            // 目标数在左边分区
+            right = pivotIndex-1;
+        }else{
+            left = pivotIndex+1;
+        }
+
+
+    }
+
+    return arr.slice(0,k);
+}
+
+// 递归的版本
+
+const findKLargestArgs2 = (nums, k) => {
+
+    const arr = nums.slice();
+    if(k>=arr.length){
+        return arr.sort((a,b)=>b-a);
+    }
+    let left = 0;
+    let right = arr.length - 1;
+
+    let targetIndex = k-1;
+    const select = (left, right) =>{
+        if(left>right) return;
+
+        const pivotIndex = partition(arr, left, right);
+
+        if(pivotIndex===targetIndex){
+            return;
+        }else if(pivotIndex>targetIndex){
+            select(left, pivotIndex-1);
+        }else{
+            select(pivotIndex+1,right);
+        }
+
+    }
+
+    select(0, arr.length-1);
+    return arr.slice(0,k);
 }

@@ -5,7 +5,7 @@ const partition = (arr, left=0, right=arr.length-1)=> {
     let i = left-1;
 
     for(let j=left;j<right;j++){
-        if(arr[j]<pivot){
+        if(arr[j]<pivot){  // 这个是从小到大，反过来就是从大到小。
             i++;
             [arr[i],arr[j]] = [arr[j],arr[i]];
         }

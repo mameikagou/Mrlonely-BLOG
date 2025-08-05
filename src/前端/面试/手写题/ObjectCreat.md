@@ -1,4 +1,3 @@
-
 #### Object.create 和 new
 
 ```js
@@ -9,6 +8,21 @@ const objectCreate=(proto)=>{
     // new的作用，就是基于构造函数的prototype，构造新对象。
     return new func();
 }
+```
+
+#### 不用 new 实现 Object.create
+
+```js
+const objectCreate2 = (proto) => {
+    // 1. 创建一个普通的空对象
+    const obj = {};
+
+    // 2. 手动将新对象的原型链接到传入的 proto 对象
+    obj.__proto__ = proto;
+
+    // 3. 返回这个新创建的对象
+    return obj;
+};
 ```
 
 #### new的时候会发生什么？
@@ -38,3 +52,15 @@ new（ `new Constructor()` ） 和 Object.create一体两面，
 Object.create传的是proto，new传的是constructor
 
 new Constructor()是创建一个构造函数的实例、Object.create(proto)创建的是一个空对象。
+
+```js
+const new3 = (constructor, ...args) => {
+    const obj = {};
+
+    obj.__proto__ = constructor.prototype;
+
+    const result = constructor.apply(obj,args);
+
+    return (result instanceof Object) ? result : obj;
+}
+```
