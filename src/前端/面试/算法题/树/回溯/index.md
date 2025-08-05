@@ -51,30 +51,42 @@ function letterCombinations(digits: string): string[] {
 - 子问题？从下标>=i的数字中构造子集
 - 下一个子问题？ 从下标>=i+1的数字中构造子集
 
+为什么“求子集”的循环需要 startIndex？
+目标：避免产生重复的组合，并确保每个元素只被考虑一次。
+在求子集 [1, 2, 3] 时，当我们选择了 1 之后，我们的“选择列表”就只应该剩下 [2, 3]。我们永远不应该回头再去选择 1，也不应该在选择了 2 之后再回头去选择 1，否则就会产生 {2, 1} 这样的重复组合。
+startIndex 参数就是实现这个“永不回头”机制的关键。
+
 ```ts
 function subsets(nums: number[]): number[][] {
-    const len = nums.length;
-    if(!len) return []
-    const res:number[][] = [];
-    const path:number[] = [];
+  const result = []; // 存放所有子集
+  const path = [];   // 存放当前路径（一个子集）
 
-    const dfs = (i:number)=>{
+  // 定义回溯函数
+  // startIndex: 本轮选择的起始位置
+  function backtrack(startIndex) {
+    // 1. 将当前路径的拷贝加入结果集
+    //    这里需要拷贝一份，因为 path 是引用类型，后续会变化
+    result.push([...path]);
 
-        if(i===len){ // 到达叶子节点的时候直接推入答案；
-            res.push([...path]);
-            return;
-        }
-
-        // 分支1: 不选当前元素nums[i]
-        dfs(i+1);
-
-        // 分支2: 选当前元素nums[i]
-        path.push(nums[i]);
-        dfs(i+1);
-        path.pop(); // 回溯，撤销选择；递归前如何，递归后也如何；
+    // 如果起始索引已经越界，就没得选了，递归终止
+    if (startIndex >= nums.length) {
+      return;
     }
-    dfs(0);
-    return res;
+
+    // 2. 遍历选择列表
+    for (let i = startIndex; i < nums.length; i++) {
+      // 做选择
+      path.push(nums[i]);
+      // 递归进入下一层决策
+      backtrack(i + 1);
+      // 撤销选择（回溯）
+      path.pop();
+    }
+  }
+
+  // 从索引 0 开始启动回溯
+  backtrack(0);
+  return result;
 };
 ```
 
@@ -89,33 +101,63 @@ bilibili:<https://www.bilibili.com/video/BV1mG4y1A7Gu/?vd_source=9529002c63d8eef
 - 子问题？ 构造排列 >= i , 剩余部分为未选的 
 - 下一个子问题？ 考虑i+1，s中除去该元素的部分
 
+目标：在排列的每一个位置上，我们都有机会选择任何一个“尚未被使用”的元素。
+在求全排列 [1, 2, 3] 时，当我们为排列的第一个位置选择元素时，我们可以选 1、2 或 3。当我们选定了第一个位置（比如是 2）之后，为第二个位置选择元素时，我们的选择列表是剩下的 [1, 3]。
+这意味着，在递归的每一层，我们都需要扫描整个原始数组，来寻找那个“还没有被用过”的元素。
+
 ```ts
 // ts中不方便直接删除一个元素，所以用一个数组来做标记
 var permute = function(nums) {
     
+    let result = [];
     let path = [];
-    let ans = [];
-    const len = nums.length;
-    const used = Array.from({length:len},()=>false)
+    let used = new Array(nums.length).fill(false);
 
-    const dfs = (i) => {
-        if(len === i){
-            ans.push(path.slice())
-        }
-        for(let j=0;j<nums.length;j++){
-            if(used[j]) continue;
+    const dfs = (startIndex) =>{
+        if(path.length===nums.length) result.push([...path]);
 
-            path.push(nums[j]);
-            used[j] = true;
-            
+        for(let i = 0;i<nums.length;i++){
+            if(used[i]) continue;
+            path.push(nums[i]);
+            used[i] = true;
+
             dfs(i+1);
-            
             path.pop();
-            used[j] = false;
+            used[i] = false;
         }
     }
     dfs(0)
-    return ans
+    return result;
 };
+```
 
+
+#### 组合
+<https://leetcode.cn/problems/combinations/description/>
+
+当找到一个符合条件的解之后，是否需要立即 return，取决于“继续沿着当前路径往下走，还有没有可能找到更多的、不同的、符合条件的解？
+
+显然，组合这里不用。
+```js
+var combine = function(n, k) {
+    // 不能回头且限制长度为2
+    let result = [];
+    let path = [];
+    let count = 0;
+    const dfs = (startIndex) => {
+        if(count===k){
+            result.push(path.slice());
+            return;  // 组合不必递归到底，所以提前返回
+        }
+        for(let i=startIndex;i<n+1;i++){
+            path.push(i);
+            count++;
+            dfs(i+1);
+            count--;
+            path.pop();
+        }
+    }
+    dfs(1);
+    return result;
+};
 ```
