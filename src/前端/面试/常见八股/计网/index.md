@@ -49,3 +49,6 @@ session：数据存储在服务端，会有同步的问题
 返回sessionId
 
 jwt：客户端存储，天然适合微服务和分布式
+
+
+#### http & https
