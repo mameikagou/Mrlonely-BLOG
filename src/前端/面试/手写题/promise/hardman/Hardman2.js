@@ -1,102 +1,62 @@
-// function Hardman(name){
-    
-//     const queue = [`Hi, I am ${name}`];
 
-//     const obj = {
-//         learn(name){
-//             queue.push(`Learn ${name}`);
-//             return obj;
-//         },
-//         rest(n){
-//             queue.push(n,`Rest for ${n}s`);
-//             return obj;
-//         },
-//         restFirst(n){
-//             queue.unshift(n, `Rest for ${n}s`);
-//             return obj;
-//         },
-//         run: async()=>{
-//             for(const item of queue){
-//                 if(typeof item === 'string'){
-//                     console.log('item');
-//                 }else{
-//                     await new Promise((res)=> setTimeout(res, item*1000));
-//                 }
-//             }
-//         }
-//     }
-//     setTimeout(obj.run,0);
-//     return obj;
-// }
-
-
-// console.log('=== 测试1：基本功能 ===');
-// Hardman('John');
-
-// console.log('\n=== 测试2：学习功能 ===');
-// Hardman('Alice').learn('JavaScript').learn('React');
-
-// console.log('\n=== 测试3：休息功能 ===');
-// Hardman('Bob').learn('Vue').rest(2).learn('Node.js');
-
-// console.log('\n=== 测试4：restFirst 功能 ===');
-// Hardman('Charlie').learn('HTML').rest(1).restFirst(2).learn('CSS');
-
-// console.log('\n=== 测试5：复杂链式调用 ===');
-// Hardman('David')
-//     .learn('TypeScript')
-//     .rest(1)
-//     .learn('Docker')
-//     .restFirst(2)
-//     .learn('Kubernetes');
-
-
-
-
-class Hardman2 {
-    
-    queue = []
+class Hardman {
+    queue = [];
+    name = ""
     constructor(name){
-        this.queue = [`Hi, I am ${name}`];
-        setTimeout(()=>this.run(), 0) // 箭头函数解决this指向问题。继承外部作用域，而不是window对象
+        this.name = name;
+        this.queue = [`Hi,I am ${this.name}`];
+
+        setTimeout(()=>this.run(),0);
     }
 
-    learn(s){
-        this.queue.push(`Learn ${s}`);
+    study(project){
+        this.queue.push(`I study ${project}`)
         return this;
     }
 
-    rest(n){
-        this.queue.push(n,`Rest for ${n} s`);
+    rest(time){
+        this.queue.push(time,`Wait ${time} seconds.`)
         return this;
     }
 
-    restFirst(n){
-        this.queue.unshift(n,`Rest for ${n} s`);
+    restFirst(time){
+        this.queue.unshift(time,`Wait ${time} seconds.`)
         return this;
     }
 
-    async run (){
-        for(const item of this.queue){
+    async run(){
+        for(let item of this.queue){
             if(typeof item === 'string'){
                 console.log(item);
             }else{
-                await new Promise((res)=>setTimeout(res, item*1000));
+                await new Promise((res)=>setTimeout(res,item*1000))
             }
         }
-        return this;
     }
 }
 
-// 测试用例
-// console.log('=== Class 版本测试1：基本功能 ===');
-// new Hardman2('John');
+function hardMan(name) {
+    return new Hardman(name);
+}
 
-// console.log('\n=== Class 版本测试2：学习功能 ===');
-// new Hardman2('Alice').learn('JavaScript').learn('React');
+// hardMan('潘潘')
+//> Hi! I am 潘潘.
 
-// console.log('\n=== Class 版本测试3：休息功能 ===');
-// new Hardman2('Bob').learn('Vue').rest(2).learn('Node.js');
 
-console.log('\n=== Class 版本测试4：restFirst 功能 ===');
-new Hardman2('Charlie').learn('HTML').rest(1).restFirst(2).learn('CSS');
+// hardMan('潘潘').study('Project')
+//> Hi! I am 潘潘.
+//> I am studying 敲码.
+
+
+hardMan('潘潘').rest(3).study('敲码')
+//> Hi! I am 潘潘.
+// 此时等待三秒钟
+//> Wait 3 seconds.
+//> I am studying 敲码.
+
+
+// hardMan('潘潘').restFirst(3).study('敲码')
+// 此时等待三秒钟
+//> Wait 3 seconds.
+//> Hi! I am 潘潘.
+//> I am studying 敲码.

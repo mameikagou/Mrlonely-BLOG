@@ -14,15 +14,6 @@ I am jack
 Start learning after 10 seconds
 Learning computer
 
-
-
-
-
-
-
-
-
-
 HardMan(“jack”).restFirst(5).learn(“chinese”) 输出
 //等待5秒
 Start learning after 5 seconds
