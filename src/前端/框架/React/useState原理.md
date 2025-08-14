@@ -36,3 +36,5 @@ useLayoutEffect (DOM 更新后、绘制前，同步执行)
     - 解决批量更新的时候，访问旧值，而造成的不一致问题
 
 如果你连续调用三次 setState({ counter: this.state.counter + 1 })，React 可能会将它们合并。在这三次调用中，this.state.counter 的值都是一样的（更新前的旧值），所以这三次调用实际上等同于 setState({ counter: 0 + 1 }) 执行了三次，最终结果是 counter 只增加了 1，而不是 3。
+
+- 如果React不提供useState，如何实现useState()钩子？（问的很深）
