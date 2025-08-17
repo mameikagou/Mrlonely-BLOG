@@ -45,3 +45,6 @@ const toLowerCamelCase = (word) => {
     return word.replace(/(?<=\w)_(\w)/g,(match,char)=>char.toUpperCase());
 }
 ```
+
+#### 匹配 < 一堆单词 >：
+- /<[\s\w]+>/g

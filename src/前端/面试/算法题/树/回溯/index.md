@@ -131,6 +131,33 @@ var permute = function(nums) {
 };
 ```
 
+原地更改的做法
+```js
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    
+    let result = [];
+    
+    const dfs = (j) => {
+        if(j === nums.length){
+            result.push(nums.slice());
+            return;
+        }
+
+        for(let i=j;i<nums.length;i++){
+            [nums[j],nums[i]] = [nums[i],nums[j]];
+            dfs(j+1);
+            [nums[j],nums[i]] = [nums[i],nums[j]];
+        }
+    }
+    dfs(0);
+    return result;
+};
+```
+
 
 #### 组合
 <https://leetcode.cn/problems/combinations/description/>
