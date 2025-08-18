@@ -1,37 +1,56 @@
-const deepEqual = (obj1, obj2, cache=new WeakMap()) => {
-    // 只比较引用的地址和普通类型
-    if(obj1 === obj2){
+const deepEqual = (obj1,obj2,cache=new WeakMap()) => {
+
+    // 浅层比较，比较是否是基本类型
+    if(obj1===obj2){
         return true;
     }
 
-
-    // 处理null或者不是对象的情况
-    if(obj1===null || typeof obj1 !== 'object' || obj2===null || typeof obj2 !== 'object'){
+    // 一个是，一个不是对象、数组
+    if(typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1===null || obj2===null){
         return false;
     }
-    // 处理缓存
-    if(cache.get(obj1) === obj2 || cache.get(obj2) === obj1){
+
+    if(cache.get(obj1)===obj2 || cache.get(obj2) === obj1){
         return true;
     }
-    cache.set(obj1,obj2);
-    cache.set(obj2,obj1);
+    cache.set(obj1, obj2);
+    cache.set(obj2, obj1);
+
+    // 处理构造函数、Date对象、RegExp对象
+    if(obj1.constructor !== obj2.constructor){
+        return false;
+    }
+
+    if(obj1 instanceof Date) {
+        return obj1.getTime() === obj2.getTime();
+    }
+
+    if(obj1 instanceof RegExp) {
+        return obj1.toString() === obj2.toString()
+    }
 
     // 处理数组
     if(Array.isArray(obj1) && Array.isArray(obj2)){
-        // 先比较长度，然后逐个递归比较，这里数组的东西可能比较杂;
-        if(obj1.length !== obj2.length) return false;
-        
-        for(let i=0;i<obj1.length;i++){
-            if(!deepEqual(obj1[i],obj2[i],cache)){
+        const len1 = obj1.length;
+        const len2 = obj2.length;
+
+        if(len1 !== len2){
+            return false;
+        }
+
+        for(let i=0;i<len1;i++){
+            if(!deepEqual(obj1[i], obj2[i], cache)){
                 return false;
             }
         }
         return true;
     }
-    // 前端已经必然不可能同时是数组了，如果这里有一个数组，那么必然不相等；
-    if(Array.isArray(obj1) || Array.isArray(obj2)) return false;
+    // 一个是数组一个不是
+    if(Array.isArray(obj1) || Array.isArray(obj2)){
+        return false;
+    }
 
-    // 处理对象本身
+    // 开始比较对象
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
 
@@ -40,12 +59,13 @@ const deepEqual = (obj1, obj2, cache=new WeakMap()) => {
     }
 
     for(const key of keys1){
-        if(!keys2.includes(key) || !deepEqual(obj1[key], obj2[key], cache)){
+        if(!obj2.hasOwnProperty(key) || !deepEqual(obj1[key], obj2[key], cache)){
             return false;
         }
     }
     return true;
 }
+
 
 // --- 测试用例 ---
 const objA = { a: 1, b: { c: 2 } };
