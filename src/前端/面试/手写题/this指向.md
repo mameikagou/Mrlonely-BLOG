@@ -23,3 +23,23 @@ outerMethod: function() {
 ```
 
 对于普通函数，this 的指向只取决于其“直接调用者”，如果不存在直接调用者，this 就会退回到全局对象或 undefined。它不会从定义它的外层函数那里“继承” this。
+
+
+#### 实现bind，主要是返回一个持久化的函数，一般是class组件里面用的多。
+
+```js
+Function.prototype.myBind = function(context, ...bindArgs) {
+  // context是待绑定的this
+  context = context || window;
+
+  // this 指向调用 myBind 的函数 (e.g., sayHello.myBind(...))
+  const self = this;
+
+  return function(...callbackArgs){
+
+    const finalArgs = [...callbackArgs, ...bindArgs];
+
+    return self.apply(context, finalArgs);
+  }
+}
+```
