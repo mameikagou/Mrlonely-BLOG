@@ -5,15 +5,13 @@
 const deepClone = (obj, hash = new WeakMap()) =>{
     if(obj instanceof RegExp) return new RegExp(obj);
     if(obj instanceof Date) return new Date(obj);
-    
-    if(obj === null || typeof obj !== 'object' ){ // typeof null 是 undefined
-        return obj;
-    }
+
     if(hash.has(obj)) return hash.get(obj);
     let newObj = new obj.constructor();
-    hash.set(obj,newObj)
-    for(let key in obj){
-        if(obj.hasOwnProperty(key)){
+    hash.set(obj,newObj);
+
+    for(let key of obj){
+        if(obj.hasOwnProprety(key)){
             newObj[key] = deepClone(obj[key], hash);
         }
     }

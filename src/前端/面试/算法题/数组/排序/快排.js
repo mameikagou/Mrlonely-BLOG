@@ -47,3 +47,35 @@ const quickSortEasy = (arr) => {
 }
 
 console.log(quickSortEasy([4, 2, 7, 1, 3, 6, 5]))
+
+
+
+
+
+const partition2 = (arr, left=0, right=arr.length-1) => {
+    const pivot = arr[right];
+    let i = left-1;
+
+    for(let j=left;j<right;j++){
+        if(arr[j]<pivot){
+            i++;
+            [arr[i],arr[j]] = [arr[j],arr[i]];
+        }
+    }
+    [arr[i+1], arr[right]] = [arr[right], arr[i+1]]
+
+    return i+1;
+}
+
+const quickSort2 = (arr, left=0,right=arr.length-1) => {
+
+    if(left<right){
+        const pivot = partition2(arr, left, right);
+        quickSort2(arr, left, pivot-1);
+        quickSort2(arr, pivot+1, right);
+    }
+
+    return arr;
+}
+
+console.log('quickSort2',quickSort2([4, 2, 7, 1, 3, 6, 5]))
