@@ -177,3 +177,30 @@ console.log("findNode 4",findNode2(data, 4));
 console.log("findNode 5",findNode2(data, 5));
 console.log("findNode 3",findNode2(data, 3));
 ```
+
+
+#### 树形结构取值
+
+给定以下树形结构，实现一个函数，当输入节点 `id` 时，返回从根节点到该节点的路径 `id` 数组。
+
+数据结构：
+
+```javascript
+const data = {
+  id: 1,
+  children: [
+    {
+      id: 2,
+      children: [
+        { id: 4, children: [] }
+      ],
+    },
+    {
+      id: 3,
+      children: null
+    }
+  ]
+};
+```
+
+#### 

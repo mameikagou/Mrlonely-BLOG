@@ -9,29 +9,34 @@ const flatArray = [
 ];
 
 const arrayToTree = (flatArray)=>{
-    const myMap = new Map();
+  const myMap = new Map();
 
-    flatArray.map(item=>{myMap.set(item.id,{...item, children:[]})});
+  flatArray.map(item=>{
+    myMap.set(item.id, {...item, children: []});
+  })
 
-    let tree = [];
-    flatArray.map(item=>{
-        const currentNode = myMap.get(item.id);
+  let tree = [];
 
-        if(item.parentId){
-            const parentNode = myMap.get(item.parentId);
+  flatArray.map(item => {
+    const curNode = myMap.get(item.id);
 
-            if(parentNode){
-                parentNode.children.push(item);
-            }
-        }else{
-            tree.push(currentNode)
-        }
-    })
+    if(item.parentId){
+      const parentNode = myMap.get(item.parentId);
 
-    return tree;
+      if(parentNode){
+        parentNode.children.push(curNode);
+      }
+    }else{
+      tree.push(curNode);
+    }
+  })
+
+  return tree;
 }
 
-console.log(arrayToTree(flatArray))
+
+
+console.log("arrayToTree",arrayToTree(flatArray))
 
 const treeData = [
   {
@@ -69,26 +74,72 @@ const treeData = [
   }
 ];
 
-const treeToArray = (tree) => {
+const treeToArray = (treeData) => {
 
-    const flatArray = [];
-    const dfs = (nodes) => {
-        if(!nodes||nodes.length===0){
-            return;
-        }
+  let flatArray = [];
 
-        for(const node of nodes){
-        
-            const {children, ...rest} = node;
+  const dfs = (tree) => {
+    if(!tree) return;
 
-            flatArray.push(rest);
-            if(children){
-                dfs(children);
-            }
-        }
+    for(let node of tree){
+      const {children, ...rest} = node;
+      flatArray.push(rest);
+      if(children){
+        dfs(children)
+      }
     }
+  }
 
-    dfs(tree);
-    return flatArray;
+  dfs(treeData);
+
+  return flatArray;
 }
-console.log(treeToArray(treeData))
+console.log('treeToArray',treeToArray(treeData))
+
+
+
+
+// 树形取值
+
+const data = {
+  id: 1,
+  children: [
+    {
+      id: 2,
+      children: [
+        { id: 4, children: [] }
+      ],
+    },
+    {
+      id: 3,
+      children: null
+    }
+  ]
+};
+
+const findPath = (data, target) => {
+  
+  let result = [];
+  const dfs = (nodes,path) => {
+    if(result.length>0 || !nodes) return;
+    const curPath = path.concat(nodes.id);
+
+    if(nodes.id === target){
+      result = curPath;
+    }
+    if(nodes.children){
+      for(let node of nodes.children){
+        dfs(node, curPath);
+      }
+    }
+  }
+
+  dfs(data, []);
+
+  return result;
+}
+
+console.log('findPath',findPath(data, 4))
+console.log('findPath',findPath(data, 3))
+console.log('findPath',findPath(data, 2))
+console.log('findPath',findPath(data, 5))
