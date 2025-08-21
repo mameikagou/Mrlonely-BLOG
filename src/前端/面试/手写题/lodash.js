@@ -13,15 +13,13 @@ const get1 = (object2, path, defaultValue) => {
     );
 };
 
-const get2 = (object, path, defaultValue) => {
-    const pathArray = Array.isArray(path) ? path : path.replace(/\[(\d+)\]/g,'.$1').split(".").filter(Boolean); //$1这里表示第一个捕获组
-    // ()括号表示一个捕获组，d表示digtal，g表示全局，+表示多个
-    // typeof的返回值永远是一个字符串
-    const result = pathArray.reduce(
-        (obj, key) =>
-            obj?.[key],
-        object
-    );
+const get2 = (object, path, defaultValue = 'default') => {
+    const pathArray = Array.isArray(path) ? path : path.replace(/\[(\d+)\]/g, '.$1').split('.').filter(Boolean);
+
+    const result = pathArray.reduce((obj,key)=>{
+        return obj?.[key]
+    },object);
+
     return result === undefined ? defaultValue : result;
 };
 
