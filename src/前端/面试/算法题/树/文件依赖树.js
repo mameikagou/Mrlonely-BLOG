@@ -31,25 +31,25 @@ var tree2 = {
 
 const resolve=(tree)=>{
 
-    let visited = new Set()
-	let result = []
+	let visited = new Set();
+	let res = [];
 
-	let dfs = (node) => {
+	const dfs = (node) => {
 		if(node.require){
-			for(const dep of node.require){
-				if(!visited.has(dep.name)){
-					dfs(dep)
+			for(let item of node.require){
+				if(!visited.has(item.name)){
+					dfs(item);
 				}
 			}
 		}
 		if(!visited.has(node.name)){
-			visited.add(node.name)
-			result.push(node.name)
+			visited.add(node.name);
+			res.push(node.name);
 		}
 	}
 
-	dfs(tree)
+	dfs(tree);
 
-	return result
+	return res;
 }
 console.log(resolve(tree2)) // ['C.js', 'E.js', 'D.js', 'B.js', 'A.js', 'page.js']

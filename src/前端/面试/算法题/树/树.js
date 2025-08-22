@@ -5,17 +5,21 @@
 // 包含了从根节点到当前节点的路径
 
 const process=(arr)=>{
-	let dfs = (arr, parentId, parentPath) =>{
-		for(let item of arr){
-			let currentPath = [...parentPath, item.id];
-			item.parentId = parentId;
-			item.path = parentPath
-			if(item.children){
-				dfs(item.children,item.id, currentPath);
+
+	const dfs = (arr, parentId=null, path=[]) =>{
+		for(let node of arr){
+			const curpath = path.concat(node.id);
+			if(parentId){
+				node.parentId = parentId;
+				node.path = curpath;
 			}
-		}		
+			if(node.children){
+				dfs(node.children, node.id, curpath);
+			}
+			
+		}
 	}
-	dfs(arr,null,[]);
+	dfs(arr);
 	return arr;
 }
 
