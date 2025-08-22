@@ -27,7 +27,7 @@ class EventEmitter {
         const callbacks = this.events.get(eventName);
         if(!callbacks) return;
 
-        const newCallbacks = this.events.get(eventName).filter(cb => cb !== callback);
+        const newCallbacks = callbacks.filter(cb => cb !== callback);
 
         this.events.set(eventName, newCallbacks);
     }
