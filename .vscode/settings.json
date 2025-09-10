@@ -1,7 +1,7 @@
 {
     "compile-hero.disable-compile-files-on-did-save-code": false,
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": false,
         "markdown": true,
         "scminput": false

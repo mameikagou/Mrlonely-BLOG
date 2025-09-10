@@ -79,3 +79,28 @@ const quickSort2 = (arr, left=0,right=arr.length-1) => {
 }
 
 console.log('quickSort2',quickSort2([4, 2, 7, 1, 3, 6, 5]))
+
+
+const quickSortStack = (arr) =>{
+    if(arr.length <= 1){
+        return arr;
+    }
+
+    const stack = [
+        [0, arr.length-1]
+    ]
+    while(stack.length>0){
+        const [left, right] = stack.pop();
+
+        if(left<right){
+
+            const pivotIndex = partition(arr, left, right);
+            stack.push([left, pivotIndex-1]);
+            stack.push([pivotIndex+1, right]);
+        }
+    }
+
+    return arr;
+}
+
+console.log('quickSortStack',quickSortStack([4, 2, 7, 1, 3, 6, 5]))
