@@ -3,7 +3,7 @@
     "github.copilot.enable": {
         "*": false,
         "plaintext": false,
-        "markdown": true,
+        "markdown": false,
         "scminput": false
     }
 }
