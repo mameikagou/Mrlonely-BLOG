@@ -4,29 +4,29 @@
 
 
 ```js
-const PromiseAll = (tasks) => {
-  return new Promise((resolve, reject) => { //这样包裹是为了方便then
-    const arr = Array.form(tasks);
+const PromiseAll = (arr) => {
+    const tasks = Array.from(arr);
     const len = arr.length;
+    return new Promise((resolve, reject)=>{
 
-    let res = [];
-    let count = 0;
-
-    for (let i = 0; i < len; i++) {
-      Promise.resolve(arr[i])
-        .then((item) => {
-          res[i] = item;
-
-          if (++count === len) {
-            resolve(res); // 整体
-          }
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    }
-  });
-};
+        let count =0;
+        let result = [];
+        if(len === 0){
+            resolve([])
+        }
+        for(let i=0;i<len;i++){
+            Promise.resolve(tasks[i]).then((item)=>{
+                result[i]=item;
+                count++;
+                if(count === len){
+                    resolve(result);
+                }
+            }).catch(e=>{
+                reject(e);
+            })
+        }
+    })
+}
 ```
 
 使用 Ts 的版本：
