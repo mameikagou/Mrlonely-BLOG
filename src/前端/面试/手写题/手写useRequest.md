@@ -3,36 +3,44 @@
 #### useRequest
 
 ```js
-import { useState, useCallback, useEffect } from 'react';
+/**
+ * 一个用于处理异步请求的自定义 Hook。
+ * @param requestFn - 一个返回 Promise 的异步函数。
+ * @param options - 配置选项，例如 { manual: true }。
+ * @returns 返回包含 data, error, loading 状态以及 run 函数的对象。
+ */
+const useRequet = (requestFn:(...args)=>Promise, options) => {
+  // 是否自动请求
+  const { manual = false } = options;
 
-export default function useRequest(service) {
-  // ... (useState 和 useCallback 的代码和上面一样)
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [state, setState] = useState({
+    data: undefined,
+    error: undefined,
+    loading: !manual,
+  })
 
-  const run = useCallback(async (...args) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await service(...args);
-      setData(response);
-      return response;
-    } catch (e) {
-      setError(e);
-      throw e;
-    } finally {
-      setLoading(false);
+  const fetchData = async () =>{
+    // 重置
+    setState({data: undefined, error: undefined, loading: true});
+    try{
+      const result = await requestFn();
+      setState({data: result, error: undefined, loading: false});
+    }catch(err){
+      setState({data: undefined, error: err, loading: false});
     }
-  }, [service]);
-  
-  // 在组件挂载时，自动执行一次 run
-  useEffect(() => {
-    run();
-  }, [run]); // 依赖于 run 函数
+  }
 
-  return { data, error, loading, run };
+  useEffect(()=>{
+    fetchData();
+  }, options)
+
+  const run = () => {
+    fetchData();
+  }
+
+  return {...state, run}
 }
+
 ```
 
 请求防抖/节流：防止用户过快地重复触发请求。
