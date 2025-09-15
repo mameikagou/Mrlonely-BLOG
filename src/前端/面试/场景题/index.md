@@ -24,7 +24,7 @@ Cross-Site Request Forgery, 跨站请求伪造。
 
 csrf token的原理是
 收到浏览器同源策略的限制，攻击者在恶意网站无法获取到可信网站的token。
-服务端服务端自己不存储 CSRF-Token，会比较cookie中和http头中的token是否一致。
+服务端服务端自己不存储 -Token，会比较cookie中和http头中的token是否一致。
 
 #### localStorage、sessionStorage、Cookie 的区别
 

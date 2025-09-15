@@ -9,6 +9,61 @@
 // • 所有请求完成后，结果按照 urls 里面的顺序依次打出（发送请求的函数可以直接使用fetch即可）
 // ```
 
+const concurrencyRequest3 = (urls, maxNum) =>{
+    // 发送的顺序
+    let index = 0;
+    // 返回的顺序
+    let count = 0;
+
+    return new Promise((resolve)=>{
+        if(urls.length===0){
+            resolve([]);
+        }
+        let result = [];
+        const request = () => {
+            // 存一下
+            const i = index;
+            const url = urls[index];
+            index++;
+            try{
+                const res = fetch(url);
+                result[i] = res;
+            }catch(err){
+                result[i] = err;
+            }finally{
+                count++;
+                if(count === urls.length){
+                    resolve(result);
+                }
+            }
+        }
+
+        const len = Math.min(maxNum, urls.length);
+
+        for(let i=0;i<len;i++){
+            request();
+        }
+
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const concurrencyRequest2 = (urls, maxNum) =>{
     let index = 0;
     let count = 0;
