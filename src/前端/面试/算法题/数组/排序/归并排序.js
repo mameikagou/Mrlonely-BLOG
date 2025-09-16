@@ -1,5 +1,4 @@
 
-
 const merge = (left, right) => {
 
     let resultArray = [];

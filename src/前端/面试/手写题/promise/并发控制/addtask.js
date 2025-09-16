@@ -2,6 +2,42 @@
 // 每次新增都会把当前队列里的任务运行完
 
 
+class superTask{
+  tasks
+  maxCount
+  runningCount
+  constructor(maxCount=2){
+    this.tasks = [];
+    this.maxCount = maxCount;
+    this.runningCount = 0;
+  }
+
+  add(task){
+    return new Promise((resolve, reject)=>{
+      this.tasks.push({
+        task,
+        resolve,
+        reject
+      })
+
+      this.run();
+    })
+  }
+
+  run(){
+    while(this.runningCount<this.maxCount && this.tasks.length>0){
+      const { resolve, reject, task } = this.tasks.shift();
+      this.runningCount++;
+
+      Promise.resolve(task()).then(resolve,reject).finally(()=>{
+        this.runningCount--;
+        this.run();
+      })
+    }
+  }
+}
+
+
 class SuperTasks{
   tasks
   maxCount
