@@ -59,6 +59,7 @@
 就是重连操作间隔指数增加：2、4、8、16等等。
 同时每次都加一点 Random数据，避免客户端同时断线又同时重连触发。
 
+参考微软的代码：https://github.com/Azure/fetch-event-source/blob/main/src/fetch.ts
 
 ##### 
 
