@@ -1,4 +1,5 @@
 
+// 数组转树
 
 const flatArray = [
   { id: 1, parentId: null, name: 'root1' },
@@ -143,3 +144,22 @@ console.log('findPath',findPath(data, 4))
 console.log('findPath',findPath(data, 3))
 console.log('findPath',findPath(data, 2))
 console.log('findPath',findPath(data, 5))
+
+
+
+
+const f1 = (x)=>{
+  return x+1;
+}
+const f2 = (x)=>{
+  return x+2;
+}
+const f3 = (x)=>{
+  return x+3;
+}
+const f4 = (x)=>{
+  return x+4;
+}
+
+const a = compose(f1,f2,f3,f4);
+console.log(a(1)) // 期望输出 f4(f3(f2(f1(1))))
