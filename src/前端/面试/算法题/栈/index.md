@@ -45,3 +45,26 @@ isValidHtml("<div>这是一个未闭合的标签") // 返回 false (缺少闭标
 isValidHtml("这是一个多余的闭标签</h1>") // 返回 false (缺少开标签)
 isValidHtml("<h1><h2></h1></h2>") // 返回 false (标签名不匹配)
 ```
+
+```js
+const isValidHtml = (str) =>{
+    if(!str) return false;
+
+    const regex = /<(\/?)(\w+)>/g
+
+    let stack = [];
+    for(const match of str.matchAll(regex)){
+        let [full, slash, targetName] = match;
+
+        // 如果是右括号
+        if(slash){
+            if(stack.length === 0) return false;
+            if(stack.pop() !== targetName) return false;
+        }else{
+            stack.push(full)
+        }
+    }
+
+    return stack.length === 0;
+}
+```

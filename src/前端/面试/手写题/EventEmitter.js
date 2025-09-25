@@ -93,3 +93,21 @@ emitter.emit('self-remove'); // 预期输出 cb7 的 log
 console.log("第二次触发 'self-remove':");
 emitter.emit('self-remove'); // 预期无 cb7 的 log
 console.log(`测试 7: cb7 总共被调用了 ${selfRemoveCount} 次。`); // 预期: 1 次
+
+
+
+// 要支持once, group, priority
+// group是个对象，存的是 {唯一标识符：监听器}
+// priorty是个数字，代表优先级，需要在emit的时候进行排序即可。
+// listener = {callback, priority, once, group}
+// once是on的特例，在emit的时候，使用off对callback进行移除即可。
+// off(eventName, callback)，off是根据callback来移除对应的listener，先在events里面移除，然后要移除对应group的listener。
+// emit(eventName, ...args)
+// events和groups里面存的都是listener, 每次更新的时候，都要
+// on(eventName, callback, option ={priority, once, group})
+class EventEmitter2 {
+
+}
+
+
+

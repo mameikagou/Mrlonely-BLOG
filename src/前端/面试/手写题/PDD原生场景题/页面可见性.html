@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const isViewVisibilty = (delay=3) => {
+            let timer = null;
+            return new Promise((resolve, reject)=>{
+
+                let cleanup = () => {
+                    // 移除监听器和setTimeout
+                    if(timer){
+                        clearTimeout(timer);
+                    }
+                    if(visibilityHandler){
+                        document.removeEventListener('visibilitychange',visibilityHandler)
+                    }
+                }
+                timer = setTimeout(()=>{
+                    cleanup();
+                    reject('视作失败')
+                },delay*1000);
+
+                visibilityHandler = () => {
+                    // 暂时不考虑兼容性 document['hidden']跟document.hidden完全等价
+                    if(document['hidden']){
+                        cleanup();
+                        resolve('视作成功')
+                    }
+                }
+
+                document.addEventListener('visibilitychange',visibilityHandler )
+            })
+        }
+    </script>
+</body>
+</html>
