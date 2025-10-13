@@ -17,25 +17,28 @@ const flatArray = [
 ];
 
 const arrayToTree = (flatArray)=>{
-    const myMap = new Map();
+  const myMap = new Map();
 
-    flatArray.map(item=>{myMap.set(item.id,{...item, children:[]})});
+  flatArray.forEach(item=>{
+    myMap.set(item.id, {...item, children:[] });
+  })
 
-    let tree = [];
-    flatArray.map(item=>{
-        if(item.parentId){
-            const parent = myMap.get(item.parentId);
-
-            if(parent){
-                parent.children.push(item);
-            }
-        }else{
-            tree.push(item)
-        }
-    })
-
-    return tree;
+  let tree = [];
+  flatArray.forEach(item=>{
+    // 注意这里node的获取。
+    const node = myMap.get(item.id);
+    if(item.parentId){
+      const parent = myMap.get(item.parentId);
+      if(parent){
+        parent.children.push(node);
+      }
+    }else{
+      tree.push(node);
+    }
+  })
+  return tree;
 }
+
 
 console.log(arrayToTree(flatArray))
 ```
@@ -81,7 +84,30 @@ const treeData = [
   }
 ];
 
-const treeToArray = (tree) => {
+// BFS, 在这也是层序遍历
+const treeToArray2 = (tree) => {
+  
+  // 初始化
+  let queue = [...tree];
+  let flatArray = [];
+
+  while(queue.length > 0){
+    const levelSize = queue.length;
+    for(let i=0;i<levelSize;i++){
+      const { children, ...rest } = queue.shift();
+      flatArray.push(rest);
+      // 注意推入的类型
+      if(children && children.length>0){
+        queue.push(...children)
+      }
+    }
+  }
+
+  return flatArray;
+}
+
+
+const treeToArray1 = (tree) => {
 
     const flatArray = [];
     const dfs = (nodes) => {
