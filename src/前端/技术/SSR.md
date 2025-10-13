@@ -106,8 +106,19 @@ hydrateRoot(document.getElementById('root'),
 );
 ```
 
+### 动态生成并设置精细的cache-control策略：
+- 304 服务端未更改。
+- 活动前 cache-control头，时间长：
+- 活动中/未登录的就比较短
 
+- 如何处理活动开始前后的“过渡“情况：
+  - 主动缓存刷新 (Active Cache Purging/Invalidation)：
+    - 定时任务 (Scheduled Job): 在后端服务中设置高精度的定时任务。
+  - 倒计时归0的时候，写一个接口，请求一次，查询活动状态。
+  - 精细化的设置刷新时间，比如离开始还剩9min的时候就，缓存就设置为9min或者更短。
+  - 开始的时候主动刷新缓存。
 
+## 以下设计的有点过于逆天：
 
 #### 问题：
 
