@@ -1,14 +1,13 @@
 // 说白了就是控制上线，只有符合的才会加
 // 每次新增都会把当前队列里的任务运行完
 
-
-class superTask{
+class SuperTasks2{
   tasks
   maxCount
   runningCount
-  constructor(maxCount=2){
-    this.tasks = [];
+  constructor(maxCount = 2){
     this.maxCount = maxCount;
+    this.tasks = [];
     this.runningCount = 0;
   }
 
@@ -19,14 +18,13 @@ class superTask{
         resolve,
         reject
       })
-
       this.run();
     })
   }
 
   run(){
-    while(this.runningCount<this.maxCount && this.tasks.length>0){
-      const { resolve, reject, task } = this.tasks.shift();
+    while( this.runningCount<this.maxCount && this.tasks.length>0 ){
+      const {task, resolve, reject} = this.tasks.shift();
       this.runningCount++;
 
       Promise.resolve(task()).then(resolve,reject).finally(()=>{
@@ -36,7 +34,6 @@ class superTask{
     }
   }
 }
-
 
 class SuperTasks{
   tasks

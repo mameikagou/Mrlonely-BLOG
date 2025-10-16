@@ -4,6 +4,7 @@
 
 
 ```js
+
 const PromiseAll = (arr) => {
     const tasks = Array.from(arr);
     const len = arr.length;
@@ -12,7 +13,7 @@ const PromiseAll = (arr) => {
         let count =0;
         let result = [];
         if(len === 0){
-            resolve([])
+            resolve([]);
         }
         for(let i=0;i<len;i++){
             Promise.resolve(tasks[i]).then((item)=>{

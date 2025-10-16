@@ -1,5 +1,6 @@
 
 
+// 订阅发布模式
 class EventEmitter {
     events;
     constructor(){
