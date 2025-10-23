@@ -23,6 +23,12 @@ const objectCreate2 = (proto) => {
     // 3. 返回这个新创建的对象
     return obj;
 };
+
+const objCreate = (proto) => {
+  const obj = {};
+  obj.__proto__ = proto;
+  return obj;
+}
 ```
 
 #### new的时候会发生什么？
@@ -69,9 +75,6 @@ const new3 = (constructor, ...args) => {
     return (result instanceof Object) ? result : obj;
 }
 ```
-
-
-
 
 
 
