@@ -54,6 +54,9 @@
                 - 中断控制：使用 AbortController 提供用户完全的控制权
         - 好处：
             - 最关键的是，它允许我们访问响应体（Response Body）作为一个可读流（ReadableStream），这使得我们可以在前端手动地、一块一块地（chunk by chunk）读取服务器发送过来的数据流。
+    - 配置头部：`Content-Type: text/event-stream`
+        - Cache-Control: no-cache (防止代理或浏览器缓存响应)
+        - Connection: keep-alive (保持连接存活)
 
 ##### 手动重连的方案：带抖动的指数退避
 就是重连操作间隔指数增加：2、4、8、16等等。

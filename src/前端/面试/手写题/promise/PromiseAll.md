@@ -30,6 +30,7 @@ const PromiseAll = (arr) => {
 }
 ```
 
+
 使用 Ts 的版本：
 
 ```ts

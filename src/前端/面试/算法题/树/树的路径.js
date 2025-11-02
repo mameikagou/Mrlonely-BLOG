@@ -1,3 +1,4 @@
+// 找到到达某关键节点的路径
 
 const findPath = (treeData, targetName) =>{
     const treeMap = new Map();
@@ -19,8 +20,6 @@ const findPath = (treeData, targetName) =>{
     }
     return path;
 }
-
-
 const treeData = [
   { id: 1, name: '根目录', pid: null },
   { id: 2, name: '文档', pid: 1 },

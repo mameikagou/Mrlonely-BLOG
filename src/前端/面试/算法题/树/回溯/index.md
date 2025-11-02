@@ -105,7 +105,7 @@ bilibili:<https://www.bilibili.com/video/BV1mG4y1A7Gu/?vd_source=9529002c63d8eef
 在求全排列 [1, 2, 3] 时，当我们为排列的第一个位置选择元素时，我们可以选 1、2 或 3。当我们选定了第一个位置（比如是 2）之后，为第二个位置选择元素时，我们的选择列表是剩下的 [1, 3]。
 这意味着，在递归的每一层，我们都需要扫描整个原始数组，来寻找那个“还没有被用过”的元素。
 
-```ts
+```js
 // ts中不方便直接删除一个元素，所以用一个数组来做标记
 var permute = function(nums) {
     
@@ -130,6 +130,7 @@ var permute = function(nums) {
     return result;
 };
 ```
+
 
 原地更改的做法
 ```js

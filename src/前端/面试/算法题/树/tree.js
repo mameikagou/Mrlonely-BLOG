@@ -9,21 +9,17 @@ const flatArray = [
   { id: 5, parentId: 3, name: 'grandchild2' },
 ];
 
-const arrayToTree = (flatArray)=>{
-  const myMap = new Map();
-
+const arrayToTree = (flatArray) => {
+  const cache = new Map();
   flatArray.map(item=>{
-    myMap.set(item.id, {...item, children: []});
+    cache.set(item.id, {...item, children: []});
   })
-
   let tree = [];
-
   flatArray.map(item => {
-    const curNode = myMap.get(item.id);
-
+    const curNode = cache.get(item.id);
     if(item.parentId){
-      const parentNode = myMap.get(item.parentId);
-
+      const parentNode = cache.get(item.parentId);
+      
       if(parentNode){
         parentNode.children.push(curNode);
       }
@@ -31,8 +27,6 @@ const arrayToTree = (flatArray)=>{
       tree.push(curNode);
     }
   })
-
-  return tree;
 }
 
 
