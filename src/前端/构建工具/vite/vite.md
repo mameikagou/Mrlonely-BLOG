@@ -47,6 +47,13 @@
 注意：no-bundle仅仅针对业务源代码，不针对`node_modules`里面的依赖代码，对于该代码，依然是整体打包的策略；
 
 ### 依赖预构建
+
+- 到底做了什么？
+    - 分析所有依赖，用Esbuild来打包成一个或几个文件。
+    - 将格式转换成ESM格式，然后按需提供源码。
+- 对比webpack，则是构建整个项目然后打包到内存中，整个加载。
+    - 热更新是通过在内存中重新打包受影响的模块。
+
 使用esbuild来做这个事：（webpack则是自研的引擎）
 - 进行格式转换，vite原生支持esm，但是也需要把别的东西转换成esm，通过``<script type="module"><script>``加载
 - 打包第三方库的代码，设置强缓存（Cache-Control: max-age=31536000,immutable），（还保存在node_modules/.vite中）
