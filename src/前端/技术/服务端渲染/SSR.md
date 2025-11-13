@@ -108,8 +108,13 @@ hydrateRoot(document.getElementById('root'),
 
 ### 动态生成并设置精细的cache-control策略：
 - 304 服务端未更改。
+- 公共的SSR页面：
+  
 - 活动前 cache-control头，时间长：
 - 活动中/未登录的就比较短
+  - 不缓存或者5s
+- 个性化/登录用户
+  - 不缓存
 
 - 如何处理活动开始前后的“过渡“情况：
   - 主动缓存刷新 (Active Cache Purging/Invalidation)：
