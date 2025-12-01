@@ -1,6 +1,8 @@
 ---
 applyTo: '**'
 ---
+严禁在任何地方使用“**”
+
 Provide project context and coding guidelines that AI should follow when generating code, answering questions, or reviewing changes.
 
 注意用中文回答问题。
