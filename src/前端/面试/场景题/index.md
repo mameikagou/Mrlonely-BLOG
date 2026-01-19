@@ -1,32 +1,58 @@
+# 场景题
 
-#### URL从输入到显示会发生什么？
-MDN的解释：https://developer.mozilla.org/zh-CN/docs/Web/Performance/Guides/How_browsers_work
+## 1. URL 从输入到显示会发生什么？
 
+### 标准答法
+- DNS 解析
+- 建立 TCP 连接（HTTPS 还包含 TLS 握手）
+- 发起 HTTP 请求并接收响应
+- 浏览器解析 HTML/CSS/JS，构建 DOM/CSSOM
+- 生成 Render Tree，布局、绘制、合成
 
-#### 用户退出重定向到登录如何规划逻辑?
+### 关键点
+- 渲染主流程：解析 → 构建树 → 布局 → 绘制 → 合成
+- 关键路径优化：减少阻塞资源、利用缓存
 
-- 前端
-    - 向后端发退出请求
-    - 重定向到登录页
-    - 对需要登录的页面进行路由保护
-- 后端
-    - 提供退出接口
-    - 为已经退出的token，设置token黑名单
+### 追问
+- HTTP/1.1 与 HTTP/2 的差异？
+- 解析过程中 JS 为什么会阻塞渲染？
 
+## 2. 用户退出后重定向到登录，如何规划逻辑？
 
-#### 讲讲 CSRF-Token 的细节
+### 标准答法
+- 前端：
+  - 调用退出接口
+  - 清理本地状态（token、用户信息）
+  - 重定向到登录页
+  - 对需登录页面做路由守卫
+- 后端：
+  - 提供退出接口
+  - 将 token 拉黑或缩短有效期
 
-Cross-Site Request Forgery, 跨站请求伪造。
+### 关键点
+- 退出要同时清理本地与服务端状态
+- 路由守卫避免“退出后回退”
 
-用户登录了一个安全的域名，然后访问了一个恶意网站，恶意网站携带一个自动的请求，指向那个安全的域名的敏感接口。
+### 追问
+- 单点登录场景如何处理退出？
 
-此时浏览器会自动带上安全的域名的token，导致服务器以为是用户本人操作，导致攻击成功。
+## 3. 讲讲 CSRF-Token 的细节
 
-csrf token的原理是
-收到浏览器同源策略的限制，攻击者在恶意网站无法获取到可信网站的token。
-服务端服务端自己不存储 -Token，会比较cookie中和http头中的token是否一致。
+### 标准答法
+- CSRF 是跨站请求伪造，利用浏览器自动携带 Cookie 造成越权请求
+- 防护方式：
+  - 同源策略限制攻击者读取 token
+  - 服务端生成 CSRF token，要求请求携带并校验
 
-#### localStorage、sessionStorage、Cookie 的区别
+### 关键点
+- 服务端一般不在 Cookie 中读取 token，而是对比 Cookie 与请求头/表单字段
+- 可配合 SameSite Cookie 降低风险
+
+### 追问
+- CSRF 与 XSS 的差异？
+- SameSite=Lax/Strict/None 的区别？
+
+## 4. localStorage、sessionStorage、Cookie 的区别
 
 | 特性 | Cookie | localStorage | sessionStorage |
 | :--- | :--- | :--- | :--- |
@@ -34,15 +60,24 @@ csrf token的原理是
 | **存储大小** | **约 4KB** | **约 5MB ~ 10MB** | **约 5MB ~ 10MB** |
 | **与服务端通信** | 每次 HTTP 请求都会自动携带 | 仅在客户端，不自动发送 | 仅在客户端，不自动发送 |
 | **作用域** | 同源下的所有窗口和标签页共享 | 同源下的所有窗口和标签页共享 | 仅在当前浏览器标签页内有效，不同标签页不共享 |
-| **API 易用性** | 需手动封装，操作繁琐 | 提供 `setItem`, `getItem` 等原生 API，简单易用 | 与 localStorage API 相同 |
-- localstorage 和 sessionstorage 区别
-    - 是否会自动清除
-    - 标签页是否共享
-- 同一个站点 localstorage 超出最大容量，别人影响了你，导致你存不进去了，这样怎么解决？
-    - 从项目管理的角度：使用约定式的前缀，定好一个key，区分来自于哪个页面或者是哪个业务，然后对他进行管理，也就是沟通后，让别人清除。
-    - 从技术角度：使用一个第三方库，比如 `localforage`，他可以自动管理存储空间，当超出最大容量时，会自动清除旧的存储。
 
-#### 双token的两个token分别是做什么的？
+### 关键点
+- localStorage 与 sessionStorage 的核心差异是生命周期与标签页共享
+- 大容量存储建议使用 IndexedDB 封装库（如 localforage）
 
-一个获取数据，一个用于获取前一个token。
-一般返回的时候都会刷新，如何refresh
+### 追问
+- localStorage 超出容量怎么办？
+- Cookie 如何设置 HttpOnly/SameSite？
+
+## 5. 双 token 的两个 token 分别做什么？
+
+### 标准答法
+- access token：用于请求业务接口，生命周期短
+- refresh token：用于刷新 access token，生命周期长
+
+### 关键点
+- refresh token 应存储更安全（如 HttpOnly Cookie）
+- 业务接口只接受 access token
+
+### 追问
+- refresh token 被盗如何止损？
