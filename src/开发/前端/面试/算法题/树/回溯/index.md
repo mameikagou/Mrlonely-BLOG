@@ -92,6 +92,103 @@ function subsets(nums: number[]): number[][] {
 
 <!-- TODO：子集的第二种模版 -->
 bilibili:<https://www.bilibili.com/video/BV1mG4y1A7Gu/?vd_source=9529002c63d8eefaf57e87e2c8193594&spm_id_from=333.788.videopod.sections>
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+    const res = [];
+
+    const path = [];
+
+    const len = nums.length;
+
+    const backtrace = (startIndex) => {
+
+        res.push(path.slice());
+
+        for(let i=startIndex; i<len; i++){
+            
+            path.push(nums[i]);
+
+            backtrace(i+1);
+
+            path.pop();
+        }
+    }
+
+    backtrace(0)
+    return res;
+};
+
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function(nums) {
+    
+    const res = [];
+    const len = nums.length;
+    const path = [];
+
+    nums.sort((a,b)=>a-b);
+    
+    const backtrace = (startIndex) => {
+
+        res.push(path.slice());
+
+        for(let i=startIndex;i<len;i++){
+
+            if(i>startIndex && nums[i]===nums[i-1]){
+                continue;
+            }
+
+            path.push(nums[i]);
+
+            backtrace(i+1);
+
+            path.pop();
+        }
+    }
+    backtrace(0)
+    return res;
+};
+
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+
+    const res = [];
+    const path = [];
+    const len = nums.length;
+    const used = new Array(len+1).fill(false);
+
+    const dfs = () => {
+
+        if(path.length === len){
+            res.push(path.slice());
+        }
+        for( let i=0; i<len; i++ ){
+
+            if(used[i]) continue;
+
+            path.push(nums[i]);
+            used[i] = true;
+
+            dfs();
+
+            path.pop();
+            used[i] = false;
+        }
+    }
+
+    dfs();
+
+    return  res;
+};
 
 #### 排列型回溯
 
@@ -189,3 +286,99 @@ var combine = function(n, k) {
     return result;
 };
 ```
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum = function(candidates, target) {
+    
+    const res = [];
+    const len = candidates.length;
+    const path = [];
+
+    candidates.sort((a,b)=>a-b);
+
+    const backtrace = (curSum, index) => {
+        if(curSum==target){
+            res.push([...path]);
+            return;
+        }
+
+        if(curSum>target) return;
+
+        for(let i=index;i<len;i++){
+            
+            path.push(candidates[i]);
+
+            backtrace(curSum+candidates[i], i) //重复选
+
+            path.pop();
+        }
+    }
+
+    backtrace(0,0);
+
+    return res;
+};
+
+- 然后这里能重复选：backtrace(i)
+- 不能重复选：backtrace(i+1)
+
+后面的解法跟子集二是一样的，过滤一下即可。
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+    
+    const res = [];
+    const len = candidates.length;
+    const path = [];
+
+    candidates.sort((a,b)=>a-b);
+
+    const backtrace = (curSum, index) => {
+        if(curSum==target){
+            res.push([...path]);
+            return;
+        }
+
+        if(curSum>target) return;
+
+        for(let i=index;i<len;i++){
+            
+            // 针对出现两个1的情况做过滤。
+            if(i>index && candidates[i]===candidates[i-1]) continue;
+
+            path.push(candidates[i]);
+
+            backtrace(curSum+candidates[i], i+1) //重复选
+
+            path.pop();
+        }
+    }
+
+    backtrace(0,0);
+
+    return res;
+};
+
+
+
+
+
+“给你一堆有重复数字的卡片，选出几张凑成 10，卡片不能重复用，且结果集不能重复。”
+
+你只需要冷笑一声：
+
+Sort 它。
+
+用 startIndex 控制循环。
+
+用 i > startIndex 去重。
+
+用 i + 1 递归。
