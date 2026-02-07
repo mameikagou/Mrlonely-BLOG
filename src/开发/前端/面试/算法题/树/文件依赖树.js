@@ -31,25 +31,24 @@ var tree2 = {
 
 const resolve=(tree)=>{
 
-	let visited = new Set();
+	// 说白了就是后续遍历从后往前
+
 	let res = [];
+	let set = new Set();
 
 	const dfs = (node) => {
+		if(set.has(node.name)) return;
+
 		if(node.require){
 			for(let item of node.require){
-				if(!visited.has(item.name)){
-					dfs(item);
-				}
+				dfs(item);
 			}
 		}
-		if(!visited.has(node.name)){
-			visited.add(node.name);
-			res.push(node.name);
-		}
+
+		set.add(node.name);
+		res.push(node.name);
 	}
-
 	dfs(tree);
-
 	return res;
 }
 console.log(resolve(tree2)) // ['C.js', 'E.js', 'D.js', 'B.js', 'A.js', 'page.js']
